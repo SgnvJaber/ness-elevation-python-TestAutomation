@@ -20,5 +20,5 @@ y = 10
 print(x != 5 and y < 10)
 # True
 print(x != 5 or y < 10)
-# True
+## True
 print(x != 5 and y >= 10)
