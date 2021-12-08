@@ -18,6 +18,7 @@ def count_letter_occurrence(word):
         if letter not in occurrence.keys():
             occurrence[letter] = 1
     # Source:https://www.geeksforgeeks.org/python-reverse-dictionary-keys-order/
+    # dic_occurrence=dict(sorted(occurrence.items(), key=lambda item: item[1],reverse=True))
     dic_occurrence = dict(reversed(list(occurrence.items())))
     return dic_occurrence
 
