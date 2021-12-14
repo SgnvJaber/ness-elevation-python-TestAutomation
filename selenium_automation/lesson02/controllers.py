@@ -8,7 +8,6 @@ last_name = "Jaber"
 continent = "europe"
 command = "Switch Commands"
 
-
 class Test_Controllers:
     def setup_class(cls):
         global driver

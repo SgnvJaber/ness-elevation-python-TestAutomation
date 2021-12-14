@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Environment>
+    <Url>https://atidcollege.co.il/Xamples/bmi/</Url>
+    <Weight>90</Weight>
+    <Height>163</Height>
+    <ExpectedResultBMI>34</ExpectedResultBMI>
+    <ExpectedMeans>That you have overweight.</ExpectedMeans>
+</Environment>

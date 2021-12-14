@@ -1,4 +1,4 @@
-input_file='example.txt'
+input_file= 'example.txt'
 def write_to_file(file_name):
     file=open(file_name,"w")
     file.write("~~~~~~~~~~~~~~~~~~~~~~\n")
