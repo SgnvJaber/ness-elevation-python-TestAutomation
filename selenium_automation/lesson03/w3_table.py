@@ -8,7 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 expected_row_size = 7
 expected_col_size = 3
 expected_country_size = 4
-
+    
 
 class Test_W3_Table:
     def setup_class(cls):
