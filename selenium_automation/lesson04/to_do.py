@@ -1,25 +1,19 @@
 import time
 import allure
+import pytest
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
 from smart_assertions import soft_assert, verify_expectations
-
-first_index = 1
-second_index = 2
-expected_text = "Hello World"
-expected_scrolled_text = "This Element is Shown When Scrolled"
-
 
 class Test_To_Do:
     def setup_class(cls):
         global driver
         driver = webdriver.Chrome(ChromeDriverManager().install())
         driver.maximize_window()
-        driver.get("https://atidcollege.co.il/Xamples/ex_actions.html")
+        driver.get("https://todomvc.com/examples/react/#/")
         driver.implicitly_wait(10)
         global action
         action = ActionChains(driver)
@@ -32,72 +26,77 @@ class Test_To_Do:
         driver.get_screenshot_as_file(image)
         allure.attach.file(image, attachment_type=allure.attachment_type.PNG)
 
-    @allure.title("Verify Draggable")
-    @allure.description("This test Verify the action- draggable")
-    def test_verify_draggable(self):
-        dropped = self.get_dropped()
-        assert dropped.is_displayed
+    @allure.title("Verify TODO FLOW")
+    @allure.description("This test verify Todo Operations:Create,Rename,Delete,Mark,Filter,And Remove All")
+    def test_verify_todo(self):
+        try:
+            tasks = ["SaedToDo1", "SaedToDo2", "SaedToDo3"]
+            self.create_tasks_for_testing(tasks)
+            self.soft_assert_tasks_creation(tasks)
+            self.rename_task("SaedToDo1", "SaedToDo1Renamed")
+            soft_assert(self.is_exist("SaedToDo1Renamed"))
+            self.delete_task("SaedToDo2")
+            soft_assert(not self.is_exist("SaedToDo2"))
+            soft_assert(self.mark_task("SaedToDo1Renamed"))
+            soft_assert(self.filter("Completed").get_attribute("class") == "selected")
+            soft_assert(not self.remove_all_completed())
+            verify_expectations()
+        except AssertionError as e:
+            self.attach_file("test_verify_todo")
+            pytest.fail("Test Failed...see details:", e)
 
-    @allure.title("Verify Click And hold")
-    @allure.description("This test Verify the action- click and hold")
-    def test_verify_click_and_hold(self):
-        list = self.get_click_and_hold_list(first_index, second_index)
-        soft_assert(list[first_index].get_attribute("class") == "ui-widget-content ui-selectee ui-selected")
-        soft_assert(list[second_index].get_attribute("class") == "ui-widget-content ui-selectee ui-selected")
-        verify_expectations()
+    @allure.step("Generate a List of tasks for testing,takes a list as an input")
+    def create_tasks_for_testing(self, tasks):
+        for task in tasks:
+            self.create_task(task)
 
-    @allure.title("Verify Double Click")
-    @allure.description("This test Verify the action- double click")
-    def test_verify_double_click(self):
-        paragraph = self.get_paragraph_after_double_click()
-        assert paragraph == expected_text
+    @allure.step("Soft assert task creation")
+    def soft_assert_tasks_creation(self, tasks):
+        for task in tasks:
+            soft_assert(self.is_exist(task))
 
-    @allure.title("Verify Mouse Movement")
-    @allure.description("This test Verify the action- mouse movement")
-    def test_verify_mouse_movement(self):
-        position = self.move_to_position()
-        bg_color = "background-color: rgb(255, 255, 0);"
-        assert position.get_attribute("style") == bg_color
+    @allure.step("Create a new task")
+    def create_task(self, task):
+        input = driver.find_element(By.XPATH, ("//input[@class='new-todo']"))
+        action.send_keys(task).click(input).send_keys(Keys.RETURN).perform()
 
-    @allure.title("Verify Scrolling")
-    @allure.description("This test Verify page scrolling")
-    def test_verify_scrolling(self):
-        scrolled_text = self.get_text_after_scrolling()
-        assert scrolled_text == expected_scrolled_text
 
-    @allure.step("Drag And Drop")
-    def get_dropped(self):
-        draggable = driver.find_element(By.ID, "draggable")
-        droppable = driver.find_element(By.ID, "droppable")
-        action.drag_and_drop(draggable, droppable).perform()
-        dropped = droppable.find_element(By.TAG_NAME, "p")
-        return dropped
+    @allure.step("Check if a task exists")
+    def is_exist(self, task):
+        size = len(driver.find_elements(By.XPATH, "//label[text()='" + task + "']"))
+        if (size > 0):
+            return True
+        return False
 
-    @allure.step("Click And Hold")
-    def get_click_and_hold_list(self, l1, l2):
-        list = driver.find_elements(By.XPATH, "//ol[@id='select_items']/li")
-        action.click_and_hold(list[l1]).click(list[l2]).perform()
-        time.sleep(3)
-        return list
+    @allure.step("Rename a Task by providing the old and new name")
+    def rename_task(self, old_name, new_name):
+        current = driver.find_element(By.XPATH, "//label[text()='" + old_name + "']")
+        action.click(current).double_click().send_keys(new_name).send_keys(Keys.ENTER).perform()
 
-    @allure.step("Double Click")
-    def get_paragraph_after_double_click(self):
-        element_to_click = driver.find_element(By.XPATH, "//p[@id='dbl_click']")
-        action.double_click(element_to_click).perform()
-        WebDriverWait(driver, 10).until(EC.text_to_be_present_in_element((By.XPATH, "//p[@id='demo']"), "Hello World"))
-        paragraph = driver.find_element(By.XPATH, "//p[@id='demo']").text
-        return paragraph
+    @allure.step("Delete a given task")
+    def delete_task(self, task):
+        label = driver.find_element(By.XPATH, "//label[text()='" + task + "']")
+        action.move_to_element(label).click().double_click()
+        action.send_keys(Keys.BACK_SPACE).send_keys(Keys.ENTER)
+        action.perform()
 
-    @allure.step("Mouse Movement")
-    def move_to_position(self):
-        position = driver.find_element(By.XPATH, "//span[@id='mouse_hover']")
-        action.move_to_element(position).perform()
+    @allure.step("Mark Task as completed")
+    def mark_task(self, task):
+        parent_div = driver.find_element(By.XPATH, "//label[text()='" + task + "']/..")
+        toggle = parent_div.find_element(By.XPATH, "//input[@class='toggle']")
+        action.click(toggle).perform()
+        return toggle
+
+    @allure.step("Filter Task By Type")
+    def filter(self, type):
+        selected_type = driver.find_element(By.PARTIAL_LINK_TEXT, type)
+        selected_type.click()
         time.sleep(1)
-        return position
+        return selected_type
 
-    @allure.step("Scrolling")
-    def get_text_after_scrolling(self):
-        script = "window.scrollTo(0, 1000);"
-        driver.execute_script(script)
-        scrolled_text = driver.find_element(By.XPATH, "//p[@id='scrolled_element']").text
-        return scrolled_text
+    @allure.step("Remove all completed Tasks")
+    def remove_all_completed(self):
+        driver.find_element(By.XPATH, "//button[@class='clear-completed']").click()
+        status = len(driver.find_elements(By.XPATH, "//span[@class='todo-count']/strong")) == 0
+        print("STATUS:" + str(status))
+        return status
