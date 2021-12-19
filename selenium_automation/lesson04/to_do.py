@@ -8,8 +8,13 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 from smart_assertions import soft_assert, verify_expectations
 
+# Question to ask in teacher: call self method in before class
+
+tasks = ["SaedToDo1", "SaedToDo2", "SaedToDo3"]
+
+
 class Test_To_Do:
-    def setup_class(cls):
+    def setup_class(self):
         global driver
         driver = webdriver.Chrome(ChromeDriverManager().install())
         driver.maximize_window()
@@ -26,28 +31,50 @@ class Test_To_Do:
         driver.get_screenshot_as_file(image)
         allure.attach.file(image, attachment_type=allure.attachment_type.PNG)
 
-    @allure.title("Verify TODO FLOW")
-    @allure.description("This test verify Todo Operations:Create,Rename,Delete,Mark,Filter,And Remove All")
-    def test_verify_todo(self):
+    @allure.title("Verify Create Tasks")
+    @allure.description("This test verify Todo Operation:Create Task")
+    def test_verify_create_task(self):
         try:
-            tasks = ["SaedToDo1", "SaedToDo2", "SaedToDo3"]
             self.create_tasks_for_testing(tasks)
             self.soft_assert_tasks_creation(tasks)
-            self.rename_task("SaedToDo1", "SaedToDo1Renamed")
-            soft_assert(self.is_exist("SaedToDo1Renamed"))
-            self.delete_task("SaedToDo2")
-            soft_assert(not self.is_exist("SaedToDo2"))
-            soft_assert(self.mark_task("SaedToDo1Renamed"))
-            soft_assert(self.filter("Completed").get_attribute("class") == "selected")
-            soft_assert(not self.remove_all_completed())
             verify_expectations()
         except AssertionError as e:
             self.attach_file("test_verify_todo")
             pytest.fail("Test Failed...see details:", e)
 
+    @allure.title("Verify Rename Task")
+    @allure.description("This test verify Todo Operation:Rename Task")
+    def test_verify_rename_task(self):
+        self.rename_task("SaedToDo1", "SaedToDo1Renamed")
+        assert self.is_exist("SaedToDo1Renamed")
+
+    @allure.title("Verify Delete Task")
+    @allure.description("This test verify Todo Operation:Delete Task")
+    def test_verify_delete_task(self):
+        self.delete_task("SaedToDo2")
+        assert not self.is_exist("SaedToDo2")
+
+    @allure.title("Mark Task")
+    @allure.description("This test verify Todo Operation:Mark Task")
+    def test_verify_mark_task(self):
+        assert self.mark_task("SaedToDo1Renamed")
+
+    @allure.title("Filter Task")
+    @allure.description("This test verify Todo Operation:Filter Task")
+    def test_verify_filter(self):
+        soft_assert(self.filter("Active").get_attribute("class") == "selected")
+        soft_assert(self.filter("All").get_attribute("class") == "selected")
+        soft_assert(self.filter("Completed").get_attribute("class") == "selected")
+        verify_expectations()
+
+    @allure.title("Remote All Completed")
+    @allure.description("This test verify Todo Operation:Remove All Completed")
+    def test_verify_all_completed(self):
+        assert (not self.remove_all_completed())
+
     @allure.step("Generate a List of tasks for testing,takes a list as an input")
-    def create_tasks_for_testing(self, tasks):
-        for task in tasks:
+    def create_tasks_for_testing(self, tasks_list):
+        for task in tasks_list:
             self.create_task(task)
 
     @allure.step("Soft assert task creation")
@@ -59,7 +86,6 @@ class Test_To_Do:
     def create_task(self, task):
         input = driver.find_element(By.XPATH, ("//input[@class='new-todo']"))
         action.send_keys(task).click(input).send_keys(Keys.RETURN).perform()
-
 
     @allure.step("Check if a task exists")
     def is_exist(self, task):
