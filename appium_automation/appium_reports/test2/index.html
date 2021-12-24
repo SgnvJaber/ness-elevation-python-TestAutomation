@@ -1,0 +1,2981 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+		<title>appium.xml</title>
+
+		<link rel="shortcut icon" href="resources/images/favicon_auto.ico">
+
+		<script type="text/javascript" src='resources/jquery-2.1.0.min.js'></script>
+		<!--[if lt IE 9]>
+			<script type="text/javascript" src='resources/jquery-1.11.1.min.js'></script>
+		<![endif]-->
+		<script type='text/javascript' src='resources/reports.js'></script>
+		<script type="text/javascript" src='resources/js/moment.min.js'></script>
+		<script type="text/javascript" src='resources/js/chart_v2.min.js'></script>
+		<script type="text/javascript" src="resources/js/bootstrap.js"></script>
+		<link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css">
+
+		<style type="text/css">
+
+		* {
+			font-family: 'Segoe UI',Tahoma,Helvetica,Sans-Serif;
+		}
+
+		a,
+		a:focus,
+		a:active,
+		a:hover{
+			color: black;
+			text-decoration: none;
+		}
+
+		.navbar{
+			position: fixed;
+			margin-bottom: 0;
+			line-height: 60px;
+			height: 59px;
+			width: 100%;
+			border-radius: 0;
+		}
+
+		.navbar h3{
+			float: left;
+			line-height: 16px;
+			font-size: 22px;
+		}
+
+		.navbar .logo{
+			float: right;
+			background-image: url(resources/images/logo.png);
+			width: 100px;
+			height: 30px;
+			background-repeat: no-repeat;
+			background-size: contain;
+			margin: 15px auto;
+		}
+
+		.navbar .logomf{
+			float: right;
+			background-image: url(resources/images/mf_logo.jpg);
+			width: 100px;
+			height: 30px;
+			background-repeat: no-repeat;
+			background-size: contain;
+			margin: 15px auto;
+		}
+
+		.nav-tabs {
+			border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+		}
+
+		.body-content{
+			position: fixed;
+			width: 100%;
+			height: calc(100% - 60px);
+			top: 60px;
+		}
+
+		.left-panel{
+			overflow-y: auto;
+			width: 20%;
+			padding: 0;
+			margin: 0;
+			height: 100%;
+		}
+
+		.left-panel .list-group-item.selected{
+			background-color: rgba(100,100,100,0.1);
+		}
+
+		.left-panel .list-group-item:hover {
+			background-color: rgba(100,100,100,0.1);
+		}
+
+		.left-panel .badge{
+			font-size: 10px;
+			float: right;
+		}
+
+		.left-panel .glyphicon-folder:before {
+  			content: "\e118";
+		}
+
+		.left-panel .collapsed .glyphicon-folder:before {
+  			content: "\e117" !important;
+		}
+
+		.left-panel .badge.success{
+			background-color: rgba(20, 160, 20, 0.8);
+		}
+
+		.left-panel .badge.failed{
+			background-color: rgba(200, 10, 10, 0.8);
+		}
+
+		.list-group-item{
+			border: none;
+			font-size: 14px;
+			display: list-item;
+			cursor: pointer;
+			border-radius: 0px !important;
+			margin-bottom: 0px;
+			padding: 14px 15px !important;
+			border-bottom: 1px solid #eee;
+		}
+
+		.list-group-item.collapse:not(.in){
+			display: none;
+		}
+
+		.left-panel ul > li:nth-child(1) .txt{
+  			font-weight: 600;
+		}
+
+		.list-group-item div:not(.glyphicon) {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.list-group-item > span {
+			float: left;
+		}
+
+		.list-group-item .txt{
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			max-width: calc(100% - 30px);
+		}
+
+		#vertical-divider{
+			position: fixed;
+			border-right: 1px solid rgba(100,100,100,0.2);
+			width: 1px;
+			height: calc(100% - 60px);
+			left: 20%;
+			top: 60px;
+			z-index: 10;
+			cursor: col-resize;
+			cursor: -webkit-grab;
+		}
+
+		#vertical-divider:hover {
+			border: 1px dashed rgba(100,100,100,0.5);
+		}
+
+		#vertical-divider:active {
+  			cursor: -webkit-grabbing;
+		}
+
+		.right-panel{
+			position: fixed;
+			width: 80%;
+			left: 20%;
+			height: calc(100% - 60px);
+			top: 60px;
+		}
+
+		.right-panel .results{
+			position: fixed;
+			height: calc(100% - 60px);
+			top: 60px;
+			width: 80%;
+			overflow-y: auto;
+			padding: 0 20px;
+			margin: 0;
+			display: none;
+		}
+
+		.right-panel .nav li {
+			font-size: 15px;
+			padding: 10px 20px;
+			cursor: pointer;
+		}
+
+		.right-panel .nav li.selected {
+			background: rgba(100,100,100,0.1);
+		}
+
+		.right-panel .results.selected{
+			display: block;
+		}
+
+		.right-panel .nav-tabs{
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+
+		.right-panel .alert .glyphicon,
+		.right-panel .panel .glyphicon{
+			margin-right: 10px;
+		}
+
+		.right-panel .two-screenshots .panel {
+			width: 49%;
+			float: left;
+		}
+
+		.right-panel .two-screenshots .panel:first-child{
+			margin-right: 2%;
+		}
+
+		.right-panel .panel .table{
+			margin: 0;
+		}
+
+		.right-panel .panel .table td{
+			border: none;
+			width: 50%;
+		}
+		
+		.table.t  td{
+			width:33% !important;
+		}
+		
+		.right-panel .panel .table tr:not(:first-child){
+			border-top: 1px solid #ddd;
+		}
+
+		.right-panel .results:not(:first-child) .page-header{
+			margin: 20px 0;
+		}
+
+		.right-panel .screenshot img{
+			max-width: 100%;
+			display: block;
+  			margin-right: auto;
+  			margin-left: auto;
+		}
+
+		.right-panel .video-wrap{
+			background-color: black;
+		}
+
+		.right-panel .video-wrap video{
+			height:600px;
+
+		}
+
+		.popover-title {
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+
+		video:-webkit-full-screen	{ width: 100% ; height: 100% ; max-height: none;}
+		video:-moz-full-screen		{ width: 100% ; height: 100% ; max-height: none;}
+		video:-ms-full-screen		{ width: 100% ; height: 100% ; max-height: none;}
+		video:-o-full-screen		{ width: 100% ; height: 100% ; max-height: none;}
+		video:full-screen			{ width: 100% ; height: 100% ; max-height: none;}
+
+		#noscript{
+			position: fixed;
+			z-index: 10;
+			bottom: 10px;
+			right: 30px;
+		}
+
+		#monitoring-graph-cpu-container{
+            width: 48%;
+            float: left;
+        }
+
+        #monitoring-graph-memory-container{
+            width: 48%;
+            float: right;
+        }
+
+		</style>
+
+	</head>
+	<body>
+		<noscript>
+			<div id='noscript' class='alert alert-danger'>
+				Javascript was not detected. Please enable Javascript in this page to access the data in this report.
+			</div>
+		</noscript>
+
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<h3>appium.xml</h3>
+							<a href='http://www.experitest.com' class='logo' target='_BLANK'></a>
+						</div>
+		</nav>
+
+		<div class='body-content'>
+
+			<div class='left-panel'>
+				<ul id='report-bar-ul' class='list-group'>
+
+					<li class='list-group-item selected' title="Test Execution Summary" data-step-counter="0">
+						<span class='txt'>Test Execution Summary</span>
+						<div class='badge'>
+							<span class='glyphicon glyphicon-th-list'></span>
+						</div>
+					</li>
+
+										
+						
+							<a data-toggle="collapse" data-parent="#report-bar-ul" href="#group-1" aria-expanded="false" aria-controls="group-1" class="collapsed">
+								<li class="list-group-item" role="tab" id='id1' data-step-counter="1">
+
+									<div class='txt'>
+										<span class='nmbr'>1</span>
+										<span> New Session [android]</span>
+									</div>
+
+																			<div class='badge success'>
+											<span class='glyphicon glyphicon-folder'></span>
+										</div>
+									
+								</li>
+							</a>
+							<div id="group-1" class="collapse" role="tabpanel" aria-expanded="false" aria-labelledby="id1">
+
+						
+												
+					
+													<li class='list-group-item' title="Init Actual Capabilities" data-step-counter="2"
+																data-content="<img src='images/0.PNG' alt='Falied to retrieve image.' style='max-height:50px;display: block; margin-right: auto; margin-left: auto;'></img>"
+																>
+
+								<div class='txt'>
+									<span class='nmbr'>1.1</span>
+									<span> Init Actual Capabilities</span>
+								</div>
+
+																	<div class='badge success'>
+										<span class='glyphicon glyphicon-ok'></span>
+									</div>
+								
+							</li>
+						
+												
+					
+													<li class='list-group-item' title="Init Context [NATIVE_APP]" data-step-counter="3"
+																data-content="<img src='images/1.PNG' alt='Falied to retrieve image.' style='max-height:50px;display: block; margin-right: auto; margin-left: auto;'></img>"
+																>
+
+								<div class='txt'>
+									<span class='nmbr'>1.2</span>
+									<span> Init Context [NATIVE_APP]</span>
+								</div>
+
+																	<div class='badge success'>
+										<span class='glyphicon glyphicon-ok'></span>
+									</div>
+								
+							</li>
+						
+												
+					
+													<li class='list-group-item' title="Get device property: device.category" data-step-counter="4"
+																>
+
+								<div class='txt'>
+									<span class='nmbr'>1.3</span>
+									<span> Get device property: device.category</span>
+								</div>
+
+																	<div class='badge success'>
+										<span class='glyphicon glyphicon-ok'></span>
+									</div>
+								
+							</li>
+						
+												
+					
+													<li class='list-group-item' title="Get context list" data-step-counter="5"
+																data-content="<img src='images/2.PNG' alt='Falied to retrieve image.' style='max-height:50px;display: block; margin-right: auto; margin-left: auto;'></img>"
+																>
+
+								<div class='txt'>
+									<span class='nmbr'>1.4</span>
+									<span> Get context list</span>
+								</div>
+
+																	<div class='badge success'>
+										<span class='glyphicon glyphicon-ok'></span>
+									</div>
+								
+							</li>
+						
+												
+					
+													<li class='list-group-item' title="Set property android.native.nonInstrumented to: true" data-step-counter="6"
+																data-content="<img src='images/3.PNG' alt='Falied to retrieve image.' style='max-height:50px;display: block; margin-right: auto; margin-left: auto;'></img>"
+																>
+
+								<div class='txt'>
+									<span class='nmbr'>1.5</span>
+									<span> Set property android.native.nonInstrumented to: true</span>
+								</div>
+
+																	<div class='badge success'>
+										<span class='glyphicon glyphicon-ok'></span>
+									</div>
+								
+							</li>
+						
+												
+					
+													<li class='list-group-item' title="Start writing device log for SM-G935F" data-step-counter="7"
+																>
+
+								<div class='txt'>
+									<span class='nmbr'>1.6</span>
+									<span> Start writing device log for SM-G935F</span>
+								</div>
+
+																	<div class='badge success'>
+										<span class='glyphicon glyphicon-ok'></span>
+									</div>
+								
+							</li>
+						
+												
+					
+													<li class='list-group-item' title="Launch native activity / URL com.example.android.apis/.ApiDemos" data-step-counter="8"
+																data-content="<img src='images/4.PNG' alt='Falied to retrieve image.' style='max-height:50px;display: block; margin-right: auto; margin-left: auto;'></img>"
+																>
+
+								<div class='txt'>
+									<span class='nmbr'>1.7</span>
+									<span> Launch native activity / URL com.example.android.apis/.ApiDemos</span>
+								</div>
+
+																	<div class='badge success'>
+										<span class='glyphicon glyphicon-ok'></span>
+									</div>
+								
+							</li>
+						
+												
+					
+													<li class='list-group-item' title="Device Action: wake" data-step-counter="9"
+																>
+
+								<div class='txt'>
+									<span class='nmbr'>1.8</span>
+									<span> Device Action: wake</span>
+								</div>
+
+																	<div class='badge success'>
+										<span class='glyphicon glyphicon-ok'></span>
+									</div>
+								
+							</li>
+						
+												
+					
+						
+							</div>
+
+						
+						
+					
+													<li class='list-group-item' title="Start Activity [com.example.ExperiBank,.LoginActivity]" data-step-counter="10"
+																data-content="<img src='images/5.PNG' alt='Falied to retrieve image.' style='max-height:50px;display: block; margin-right: auto; margin-left: auto;'></img>"
+																>
+
+								<div class='txt'>
+									<span class='nmbr'>2</span>
+									<span> Start Activity [com.example.ExperiBank,.LoginActivity]</span>
+								</div>
+
+																	<div class='badge failed'>
+										<span class='glyphicon glyphicon-remove'></span>
+									</div>
+								
+							</li>
+						
+												
+					
+													<li class='list-group-item' title="Quit" data-step-counter="11"
+																data-content="<img src='images/6.PNG' alt='Falied to retrieve image.' style='max-height:50px;display: block; margin-right: auto; margin-left: auto;'></img>"
+																>
+
+								<div class='txt'>
+									<span class='nmbr'>3</span>
+									<span> Quit</span>
+								</div>
+
+																	<div class='badge success'>
+										<span class='glyphicon glyphicon-ok'></span>
+									</div>
+								
+							</li>
+						
+												
+									</ul>
+				<div id="vertical-divider"></div>
+			</div>
+
+			<div class='right-panel'>
+
+				
+				<div class='results' style="display:block;" data-step-counter="0">
+					<h3 class="page-header">
+						Test Execution Summary
+					</h3>
+										<div class="alert alert-danger" role="alert">
+						<span class='glyphicon glyphicon-remove'></span>Failed
+					</div>
+					
+   					
+					<div class='panel panel-default'>
+						<div class='panel-heading'>Execution Information</div>
+						<div class='panel-body'>
+							<table class='table'>
+								<tbody>
+									<tr>
+										<td>Time Zone</td>
+										<td>Israel Standard Time</td>
+									</tr>
+									<tr>
+										<td>Run Started</td>
+										<td>Tue, 21 Dec 2021 10:18:16</td>
+									</tr>
+									<tr>
+										<td>Total Time</td>
+										<td>00:00:09.971</td>
+									</tr>
+									<tr>
+										<td>Project Path</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>User</td>
+										<td>Saed</td>
+									</tr>
+		                            <tr>
+		                                <td>Machine Name</td>
+		                                <td>DESKTOP-LVSINNE</td>
+		                            </tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					
+					
+					<div class='panel panel-default'>
+						<div class='panel-heading'>Device Information <small>(SM-G935F)</small></div>
+						<div class='panel-body'>
+							<table class='table'>
+								<tbody>
+									<tr>
+										<td>Name</td>
+										<td>SM-G935F</td>
+									</tr>
+									<tr>
+										<td>OS</td>
+										<td>Android</td>
+									</tr>
+									<tr>
+										<td>Model</td>
+										<td>SM-G935F</td>
+									</tr>
+									<tr>
+										<td>Manufacturer</td>
+										<td>samsung</td>
+									</tr>
+									<tr>
+										<td>Version</td>
+										<td>8.0.0</td>
+									</tr>
+									<tr>
+										<td>Screen Size</td>
+										<td>1440x2560</td>
+									</tr>
+									<tr>
+										<td>S/N</td>
+										<td>ce051605b5d4d82c03</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+                                                                <div class='panel panel-default'>
+                            <div class='panel-heading'>Capabilities</div>
+                            <div class='panel-body'>
+                                <table class='table'>
+                                    <tbody>
+                                                                                    <tr>
+                                                <td>appActivity</td>
+                                                <td>.ApiDemos</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>appBuildVersion</td>
+                                                <td></td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>appPackage</td>
+                                                <td>com.example.android.apis</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>appReleaseVersion</td>
+                                                <td></td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>appiumVersion</td>
+                                                <td>1.8.0</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>applicationClearData</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>autoAcceptAlerts</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>autoDismissAlerts</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>autoGrantPermissions</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>autoWebview</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>commandTimeouts</td>
+                                                <td>120000</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>desired</td>
+                                                <td>{appPackage=com.example.android.apis, appActivity=.ApiDemos, reportDirectory=c:/Automation/Python/test_automation/appium_automation/appium_reports, reportFormat=xml, udid=ce051605b5d4d82c03, platformName=android, testName=appium.xml}</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>device.majorVersion</td>
+                                                <td>8</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>device.manufacture</td>
+                                                <td>samsung</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>device.model</td>
+                                                <td>SM-G935F</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>device.name</td>
+                                                <td>SM-G935F</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>device.os</td>
+                                                <td>Android</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>device.screenSize</td>
+                                                <td>1440x2560</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>device.serialNumber</td>
+                                                <td>ce051605b5d4d82c03</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>device.version</td>
+                                                <td>8.0.0</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>deviceUDID</td>
+                                                <td>ce051605b5d4d82c03</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>dontGoHomeOnQuit</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>dontStopAppOnReset</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>fullReset</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>install.only.for.update</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>installOnlyForUpdate</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>instrumentApp</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>keystorePath</td>
+                                                <td>~/.android/debug.keystore</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>locationServicesAuthorized</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>newSessionWaitTimeout</td>
+                                                <td>600</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>noReset</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>platformName</td>
+                                                <td>android</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>projectName</td>
+                                                <td></td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>reportDirectory</td>
+                                                <td>c:/Automation/Python/test_automation/appium_automation/appium_reports</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>reportFormat</td>
+                                                <td>xml</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>reportUrl</td>
+                                                <td>c:\Automation\Python\test_automation\appium_automation\appium_reports\test2</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>reservationDuration</td>
+                                                <td>240</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>takeScreenshots</td>
+                                                <td>true</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>test.type</td>
+                                                <td>Mobile</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>testName</td>
+                                                <td>appium.xml</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>udid</td>
+                                                <td>ce051605b5d4d82c03</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>useKeystore</td>
+                                                <td>false</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td>waitForDeviceTimeout</td>
+                                                <td>120000</td>
+                                            </tr>
+                                                                            </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    
+
+                    <script type="text/javascript">
+
+                    $(document).ready(function(){
+
+                        var cpuLineData = {
+                            labels: [
+                                                            ],
+                            datasets: [
+                                {
+                                    label: "CPU usage over time",
+                                    fill: false,
+                                    lineTension: 0.1,
+                                    backgroundColor: "rgba(91,191,70,0.4)",
+                                    borderColor: "rgba(91,191,70,1)",
+                                    borderCapStyle: 'butt',
+                                    borderDash: [],
+                                    borderDashOffset: 0.0,
+                                    borderJoinStyle: 'miter',
+                                    pointBorderColor: "rgba(91,191,70,1)",
+                                    pointBackgroundColor: "#fff",
+                                    pointBorderWidth: 1,
+                                    pointHoverRadius: 5,
+                                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                                    pointHoverBorderWidth: 2,
+                                    pointRadius: 2,
+                                    pointHitRadius: 10,
+                                    data: [
+                                                                            ],
+                                }
+                            ]
+                        };
+
+                        var cpuLineOptions = {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            animation: false,
+                            scales: {
+                                xAxes: [{
+                                    type: "time",
+                                    time: {
+                                        format: 'DD/MM/YYYY HH:mm:ss',
+                                        tooltipFormat: 'll HH:mm:ss'
+                                    },
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Time'
+                                    }
+                                }, ],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: '%'
+                                    }
+                                }]
+                            }
+                        };
+
+                        var memoryLineData = {
+                            labels: [
+                                                            ],
+                            datasets: [
+                                {
+                                    label: "Memory usage over time",
+                                    fill: false,
+                                    lineTension: 0.1,
+                                    backgroundColor: "rgba(247,70,74,0.4)",
+                                    borderColor: "rgba(247,70,74,1)",
+                                    borderCapStyle: 'butt',
+                                    borderDash: [],
+                                    borderDashOffset: 0.0,
+                                    borderJoinStyle: 'miter',
+                                    pointBorderColor: "rgba(247,70,74,1)",
+                                    pointBackgroundColor: "#fff",
+                                    pointBorderWidth: 1,
+                                    pointHoverRadius: 5,
+                                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                                    pointHoverBorderWidth: 2,
+                                    pointRadius: 2,
+                                    pointHitRadius: 10,
+                                    data: [
+                                                                            ],
+                                }
+                            ]
+                        };
+
+                        var memoryLineOptions = {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            animation: false,
+                            scales: {
+                                xAxes: [{
+                                    type: "time",
+                                    time: {
+                                        format: 'DD/MM/YYYY HH:mm:ss',
+                                        tooltipFormat: 'll HH:mm:ss'
+                                    },
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Time'
+                                    }
+                                }, ],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'MB'
+                                    }
+                                }]
+                            }
+                        };
+
+                        var cpuCtx = document.getElementById("monitoringCpuGraph").getContext("2d");;
+
+                        var cpuLineChart = Chart.Line(cpuCtx, {
+                            data: cpuLineData,
+                            options: cpuLineOptions
+                        });
+
+                        var memoryCtx = document.getElementById("monitoringMemoryGraph").getContext("2d");;
+
+                        var memoryLineChart = Chart.Line(memoryCtx, {
+                            data: memoryLineData,
+                            options: memoryLineOptions
+                        });
+
+
+                    });
+
+                    </script>
+
+
+					<!--
+										<div class='panel panel-default'>
+						<div class='panel-heading'>Transactions Information</div>
+						<div class='panel-body'>
+							<table class='table t'>
+								<thead>
+									<th>Step #</th>
+									<th>Name</th>
+									<th>Duration (seconds)</th>
+								</thead>
+								<tbody>
+																	</tbody>
+							</table>
+						</div>
+					</div>
+										-->
+				</div>
+
+				
+				
+					
+					<div class='results' data-step-counter="1">
+						<ul class='nav nav-tabs sub-tabs'>
+							<li class='selected'>Result Details</li>
+
+														<li>Debug Properties</li>
+													</ul>
+						<div class='sub-results' style="display: none;">
+
+							<h3 class="page-header">Start steps group 'New Session [android]'</h3>
+
+														<div class='panel panel-success'>
+								<div class='panel-heading'>
+									<span class='glyphicon glyphicon-ok'></span>Passed
+								</div>
+							
+
+
+								<div class='panel-body'>
+									<div>Total Time: 5.682 Seconds</div>
+																</div>
+							</div>
+
+							<script type="text/javascript">
+							function toggleData(step) {
+                                var $btn = document.getElementById("expand-data-btn-"+step);
+                                var $expanded = document.getElementById("expand-data-"+step);
+                                var $collapsed = document.getElementById("collapse-data-"+step);
+                                var btn_class = $btn.className.split(" ");
+                                if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                    btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                    $collapsed.style.display="none";
+                                    $expanded.style.display="block";
+                                }
+                                else {
+                                    btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                    $collapsed.style.display="block";
+                                    $expanded.style.display="none";
+                                }
+                                $btn.className = btn_class.join(" ");
+                            }
+                            </script>
+							
+														<div class='panel panel-default'>
+								<div class='panel-heading'>
+									Group Results
+								</div>
+								<div class='panel-body'>
+									<div>8 / 8 steps passed in group</div>
+								</div>
+							</div>
+							
+							
+								
+								
+								
+												</div>
+
+
+                        <script type="text/javascript">
+
+                        function toggleParamsData(step) {
+
+                            var $btn = document.getElementById("expand-data-params-btn-" + step);
+                            var $collapsed = document.getElementById("collapse-data-params-" + step);
+                            var btn_class = $btn.className.split(" ");
+
+                            if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                $collapsed.style.display = "block";
+                            } else {
+                                btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                $collapsed.style.display = "none";
+                            }
+
+                            $btn.className = btn_class.join(" ");
+                        }
+
+                        </script>
+
+												<div class='sub-results'>
+
+						
+							<div class="panel panel-default">
+								<div class="panel-heading">Debug Properties</div>
+								<div class="panel-body">
+									<table class='table'>
+																				<tbody>
+																							<tr>
+													<td>caption</td>
+													<td>New Session [android]</td>
+												</tr>
+																																			<tr>
+													<td>Client ID</td>
+													<td>clientID:jsonwp:version=1.00:ad82c2b7-c790-4643-bb52-8833782c062d</td>
+												</tr>
+																																			<tr>
+													<td>Console Output</td>
+													<td>Start steps group 'New Session [android]'</td>
+												</tr>
+																																			<tr>
+													<td>Device Name</td>
+													<td>adb:SM-G935F</td>
+												</tr>
+																																			<tr>
+													<td>End Time</td>
+													<td>Tue Dec 21 10:18:17 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Found</td>
+													<td>false</td>
+												</tr>
+																																			<tr>
+													<td>methodArgs</td>
+													<td>[Ljava.lang.Object;@1605c08</td>
+												</tr>
+																																			<tr>
+													<td>methodName</td>
+													<td>startStepsGroup</td>
+												</tr>
+																																			<tr>
+													<td>Port</td>
+													<td>N/A</td>
+												</tr>
+																																			<tr>
+													<td>product.version</td>
+													<td>21.10.8524</td>
+												</tr>
+																																			<tr>
+													<td>Report</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Scenario Index</td>
+													<td>0</td>
+												</tr>
+																																			<tr>
+													<td>Start Time</td>
+													<td>Tue Dec 21 10:18:17 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Status</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Step</td>
+													<td>1</td>
+												</tr>
+																																			<tr>
+													<td>Time (in sec)</td>
+													<td>0</td>
+												</tr>
+																																	</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+
+					
+				
+					
+					<div class='results' data-step-counter="2">
+						<ul class='nav nav-tabs sub-tabs'>
+							<li class='selected'>Result Details</li>
+
+														<li>Debug Properties</li>
+													</ul>
+						<div class='sub-results' style="display: none;">
+
+							<h3 class="page-header">Init Actual Capabilities</h3>
+
+														<div class='panel panel-success'>
+								<div class='panel-heading'>
+									<span class='glyphicon glyphicon-ok'></span>Passed
+								</div>
+							
+
+
+								<div class='panel-body'>
+									<div>Total Time: 0.0 Seconds</div>
+																</div>
+							</div>
+
+							<script type="text/javascript">
+							function toggleData(step) {
+                                var $btn = document.getElementById("expand-data-btn-"+step);
+                                var $expanded = document.getElementById("expand-data-"+step);
+                                var $collapsed = document.getElementById("collapse-data-"+step);
+                                var btn_class = $btn.className.split(" ");
+                                if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                    btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                    $collapsed.style.display="none";
+                                    $expanded.style.display="block";
+                                }
+                                else {
+                                    btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                    $collapsed.style.display="block";
+                                    $expanded.style.display="none";
+                                }
+                                $btn.className = btn_class.join(" ");
+                            }
+                            </script>
+														<div class="panel panel-default">
+																	<div class="panel-heading">Result Data</div>
+									<div class="panel-body">{appPackage=com.example.android.apis, device.majorVersion=8, dontGoHomeOnQuit=false, device.os=Android, noReset=false, dontStopAppOnReset=false, applicationClearData=false, reservationDuration=240, reportFormat=xml, fullReset=false, deviceUDID=ce051605b5d4d82c03, install.only.for.update=false, desired={appPackage=com.example.android.apis, appActivity=.ApiDemos, reportDirectory=c:/Automation/Python/test_automation/appium_automation/appium_reports, reportFormat=xml, udid=ce051605b5d4d82c03, platformName=android, testName=appium.xml}, device.serialNumber=ce051605b5d4d82c03, locationServicesAuthorized=false, device.version=8.0.0, reportDirectory=c:/Automation/Python/test_automation/appium_automation/appium_reports, autoWebview=false, udid=ce051605b5d4d82c03, platformName=android, testName=appium.xml, device.screenSize=1440x2560, useKeystore=false, test.type=Mobile, commandTimeouts=120000, device.manufacture=samsung, instrumentApp=false, appiumVersion=1.8.0, autoDismissAlerts=false, reportUrl=c:\Automation\Python\test_automation\appium_automation\appium_reports\test2, newSessionWaitTimeout=600, keystorePath=~/.android/debug.keystore, appActivity=.ApiDemos, installOnlyForUpdate=false, waitForDeviceTimeout=120000, device.model=SM-G935F, device.name=SM-G935F, autoGrantPermissions=false, appBuildVersion=, appReleaseVersion=, takeScreenshots=true, projectName=, autoAcceptAlerts=false}</div>
+															</div>
+							
+							
+							
+								
+																<div class='panel panel-default screenshot'>
+									<div class='panel-heading'>
+										Result Screenshot
+																				<a class="btn btn-default btn-xs pull-right dump-link" href="images/0.PNG" target="_blank">open</a>
+																			</div>
+									<div class='panel-body'>
+										<div class='img'>
+											<a href='images/0.PNG' target="_blank" >
+												<img src='images/0.PNG'/>
+											</a>
+										</div>
+									</div>
+								</div>
+								
+								
+												</div>
+
+
+                        <script type="text/javascript">
+
+                        function toggleParamsData(step) {
+
+                            var $btn = document.getElementById("expand-data-params-btn-" + step);
+                            var $collapsed = document.getElementById("collapse-data-params-" + step);
+                            var btn_class = $btn.className.split(" ");
+
+                            if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                $collapsed.style.display = "block";
+                            } else {
+                                btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                $collapsed.style.display = "none";
+                            }
+
+                            $btn.className = btn_class.join(" ");
+                        }
+
+                        </script>
+
+												<div class='sub-results'>
+
+						                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <button class="btn btn-default glyphicon glyphicon-plus btn-xs pull-left" style="outline:none" id="expand-data-params-btn-2" onclick="toggleParamsData(2)"></button>
+                                        Command Parameters
+                                </div>
+                                <div class="panel-body" id="collapse-data-params-2" style="display:none">
+                                                                    </div>
+                        </div>
+                        
+							<div class="panel panel-default">
+								<div class="panel-heading">Debug Properties</div>
+								<div class="panel-body">
+									<table class='table'>
+																				<tbody>
+																							<tr>
+													<td>Application Bounds</td>
+													<td>0,0,1440,2560</td>
+												</tr>
+																																			<tr>
+													<td>Client ID</td>
+													<td>clientID:jsonwp:version=1.00:ad82c2b7-c790-4643-bb52-8833782c062d</td>
+												</tr>
+																																			<tr>
+													<td>Console Output</td>
+													<td>Init Actual Capabilities</td>
+												</tr>
+																																			<tr>
+													<td>Device Name</td>
+													<td>adb:SM-G935F</td>
+												</tr>
+																																			<tr>
+													<td>End Time</td>
+													<td>Tue Dec 21 10:18:17 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Found</td>
+													<td>false</td>
+												</tr>
+																																			<tr>
+													<td>Image Height</td>
+													<td>711</td>
+												</tr>
+																																			<tr>
+													<td>Image Width</td>
+													<td>400</td>
+												</tr>
+																																			<tr>
+													<td>Output File</td>
+													<td>c:\Automation\Python\test_automation\appium_automation\appium_reports\test2\images\0.PNG</td>
+												</tr>
+																																			<tr>
+													<td>Port</td>
+													<td>N/A</td>
+												</tr>
+																																			<tr>
+													<td>product.version</td>
+													<td>21.10.8524</td>
+												</tr>
+																																			<tr>
+													<td>Report</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Scenario Index</td>
+													<td>0</td>
+												</tr>
+																																			<tr>
+													<td>Screen Height</td>
+													<td>2560</td>
+												</tr>
+																																			<tr>
+													<td>Screen Width</td>
+													<td>1440</td>
+												</tr>
+																																			<tr>
+													<td>Start Time</td>
+													<td>Tue Dec 21 10:18:17 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Status</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Step</td>
+													<td>2</td>
+												</tr>
+																																			<tr>
+													<td>text</td>
+													<td>{appPackage=com.example.android.apis, device.majorVersion=8, dontGoHomeOnQuit=false, device.os=Android, noReset=false, dontStopAppOnReset=false, applicationClearData=false, reservationDuration=240, reportFormat=xml, fullReset=false, deviceUDID=ce051605b5d4d82c03, install.only.for.update=false, desired={appPackage=com.example.android.apis, appActivity=.ApiDemos, reportDirectory=c:/Automation/Python/test_automation/appium_automation/appium_reports, reportFormat=xml, udid=ce051605b5d4d82c03, platformName=android, testName=appium.xml}, device.serialNumber=ce051605b5d4d82c03, locationServicesAuthorized=false, device.version=8.0.0, reportDirectory=c:/Automation/Python/test_automation/appium_automation/appium_reports, autoWebview=false, udid=ce051605b5d4d82c03, platformName=android, testName=appium.xml, device.screenSize=1440x2560, useKeystore=false, test.type=Mobile, commandTimeouts=120000, device.manufacture=samsung, instrumentApp=false, appiumVersion=1.8.0, autoDismissAlerts=false, reportUrl=c:\Automation\Python\test_automation\appium_automation\appium_reports\test2, newSessionWaitTimeout=600, keystorePath=~/.android/debug.keystore, appActivity=.ApiDemos, installOnlyForUpdate=false, waitForDeviceTimeout=120000, device.model=SM-G935F, device.name=SM-G935F, autoGrantPermissions=false, appBuildVersion=, appReleaseVersion=, takeScreenshots=true, projectName=, autoAcceptAlerts=false}</td>
+												</tr>
+																																			<tr>
+													<td>Time (in sec)</td>
+													<td>0</td>
+												</tr>
+																																	</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+
+					
+				
+					
+					<div class='results' data-step-counter="3">
+						<ul class='nav nav-tabs sub-tabs'>
+							<li class='selected'>Result Details</li>
+
+														<li>Debug Properties</li>
+													</ul>
+						<div class='sub-results' style="display: none;">
+
+							<h3 class="page-header">Init Context [NATIVE_APP]</h3>
+
+														<div class='panel panel-success'>
+								<div class='panel-heading'>
+									<span class='glyphicon glyphicon-ok'></span>Passed
+								</div>
+							
+
+
+								<div class='panel-body'>
+									<div>Total Time: 0.0 Seconds</div>
+																</div>
+							</div>
+
+							<script type="text/javascript">
+							function toggleData(step) {
+                                var $btn = document.getElementById("expand-data-btn-"+step);
+                                var $expanded = document.getElementById("expand-data-"+step);
+                                var $collapsed = document.getElementById("collapse-data-"+step);
+                                var btn_class = $btn.className.split(" ");
+                                if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                    btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                    $collapsed.style.display="none";
+                                    $expanded.style.display="block";
+                                }
+                                else {
+                                    btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                    $collapsed.style.display="block";
+                                    $expanded.style.display="none";
+                                }
+                                $btn.className = btn_class.join(" ");
+                            }
+                            </script>
+														<div class="panel panel-default">
+																	<div class="panel-heading">Result Data</div>
+									<div class="panel-body">NATIVE_APP</div>
+															</div>
+							
+							
+							
+								
+																<div class='panel panel-default screenshot'>
+									<div class='panel-heading'>
+										Result Screenshot
+																				<a class="btn btn-default btn-xs pull-right dump-link" href="images/1.PNG" target="_blank">open</a>
+																			</div>
+									<div class='panel-body'>
+										<div class='img'>
+											<a href='images/1.PNG' target="_blank" >
+												<img src='images/1.PNG'/>
+											</a>
+										</div>
+									</div>
+								</div>
+								
+								
+												</div>
+
+
+                        <script type="text/javascript">
+
+                        function toggleParamsData(step) {
+
+                            var $btn = document.getElementById("expand-data-params-btn-" + step);
+                            var $collapsed = document.getElementById("collapse-data-params-" + step);
+                            var btn_class = $btn.className.split(" ");
+
+                            if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                $collapsed.style.display = "block";
+                            } else {
+                                btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                $collapsed.style.display = "none";
+                            }
+
+                            $btn.className = btn_class.join(" ");
+                        }
+
+                        </script>
+
+												<div class='sub-results'>
+
+						                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <button class="btn btn-default glyphicon glyphicon-plus btn-xs pull-left" style="outline:none" id="expand-data-params-btn-3" onclick="toggleParamsData(3)"></button>
+                                        Command Parameters
+                                </div>
+                                <div class="panel-body" id="collapse-data-params-3" style="display:none">
+                                                                    </div>
+                        </div>
+                        
+							<div class="panel panel-default">
+								<div class="panel-heading">Debug Properties</div>
+								<div class="panel-body">
+									<table class='table'>
+																				<tbody>
+																							<tr>
+													<td>Application Bounds</td>
+													<td>0,0,1440,2560</td>
+												</tr>
+																																			<tr>
+													<td>Client ID</td>
+													<td>clientID:jsonwp:version=1.00:ad82c2b7-c790-4643-bb52-8833782c062d</td>
+												</tr>
+																																			<tr>
+													<td>Console Output</td>
+													<td>Init Context [NATIVE_APP]</td>
+												</tr>
+																																			<tr>
+													<td>Device Name</td>
+													<td>adb:SM-G935F</td>
+												</tr>
+																																			<tr>
+													<td>End Time</td>
+													<td>Tue Dec 21 10:18:17 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Found</td>
+													<td>false</td>
+												</tr>
+																																			<tr>
+													<td>Image Height</td>
+													<td>711</td>
+												</tr>
+																																			<tr>
+													<td>Image Width</td>
+													<td>400</td>
+												</tr>
+																																			<tr>
+													<td>Output File</td>
+													<td>c:\Automation\Python\test_automation\appium_automation\appium_reports\test2\images\1.PNG</td>
+												</tr>
+																																			<tr>
+													<td>Port</td>
+													<td>N/A</td>
+												</tr>
+																																			<tr>
+													<td>product.version</td>
+													<td>21.10.8524</td>
+												</tr>
+																																			<tr>
+													<td>Report</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Scenario Index</td>
+													<td>0</td>
+												</tr>
+																																			<tr>
+													<td>Screen Height</td>
+													<td>2560</td>
+												</tr>
+																																			<tr>
+													<td>Screen Width</td>
+													<td>1440</td>
+												</tr>
+																																			<tr>
+													<td>Start Time</td>
+													<td>Tue Dec 21 10:18:17 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Status</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Step</td>
+													<td>3</td>
+												</tr>
+																																			<tr>
+													<td>text</td>
+													<td>NATIVE_APP</td>
+												</tr>
+																																			<tr>
+													<td>Time (in sec)</td>
+													<td>0</td>
+												</tr>
+																																	</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+
+					
+				
+					
+					<div class='results' data-step-counter="4">
+						<ul class='nav nav-tabs sub-tabs'>
+							<li class='selected'>Result Details</li>
+
+														<li>Debug Properties</li>
+													</ul>
+						<div class='sub-results' style="display: none;">
+
+							<h3 class="page-header">Get device property: device.category</h3>
+
+														<div class='panel panel-success'>
+								<div class='panel-heading'>
+									<span class='glyphicon glyphicon-ok'></span>Passed
+								</div>
+							
+
+
+								<div class='panel-body'>
+									<div>Total Time: 0.0 Seconds</div>
+																</div>
+							</div>
+
+							<script type="text/javascript">
+							function toggleData(step) {
+                                var $btn = document.getElementById("expand-data-btn-"+step);
+                                var $expanded = document.getElementById("expand-data-"+step);
+                                var $collapsed = document.getElementById("collapse-data-"+step);
+                                var btn_class = $btn.className.split(" ");
+                                if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                    btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                    $collapsed.style.display="none";
+                                    $expanded.style.display="block";
+                                }
+                                else {
+                                    btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                    $collapsed.style.display="block";
+                                    $expanded.style.display="none";
+                                }
+                                $btn.className = btn_class.join(" ");
+                            }
+                            </script>
+														<div class="panel panel-default">
+																	<div class="panel-heading">Result Data</div>
+									<div class="panel-body">PHONE</div>
+															</div>
+							
+							
+							
+								
+								
+								
+												</div>
+
+
+                        <script type="text/javascript">
+
+                        function toggleParamsData(step) {
+
+                            var $btn = document.getElementById("expand-data-params-btn-" + step);
+                            var $collapsed = document.getElementById("collapse-data-params-" + step);
+                            var btn_class = $btn.className.split(" ");
+
+                            if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                $collapsed.style.display = "block";
+                            } else {
+                                btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                $collapsed.style.display = "none";
+                            }
+
+                            $btn.className = btn_class.join(" ");
+                        }
+
+                        </script>
+
+												<div class='sub-results'>
+
+						
+							<div class="panel panel-default">
+								<div class="panel-heading">Debug Properties</div>
+								<div class="panel-body">
+									<table class='table'>
+																				<tbody>
+																							<tr>
+													<td>Client ID</td>
+													<td>clientID:jsonwp:version=1.00:ad82c2b7-c790-4643-bb52-8833782c062d</td>
+												</tr>
+																																			<tr>
+													<td>Console Output</td>
+													<td>Get device property: device.category</td>
+												</tr>
+																																			<tr>
+													<td>Device Name</td>
+													<td>adb:SM-G935F</td>
+												</tr>
+																																			<tr>
+													<td>End Time</td>
+													<td>Tue Dec 21 10:18:17 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Found</td>
+													<td>false</td>
+												</tr>
+																																			<tr>
+													<td>methodArgs</td>
+													<td>[Ljava.lang.Object;@129222</td>
+												</tr>
+																																			<tr>
+													<td>methodName</td>
+													<td>getDeviceProperty</td>
+												</tr>
+																																			<tr>
+													<td>Port</td>
+													<td>N/A</td>
+												</tr>
+																																			<tr>
+													<td>product.version</td>
+													<td>21.10.8524</td>
+												</tr>
+																																			<tr>
+													<td>Report</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Scenario Index</td>
+													<td>0</td>
+												</tr>
+																																			<tr>
+													<td>Start Time</td>
+													<td>Tue Dec 21 10:18:17 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Status</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Step</td>
+													<td>4</td>
+												</tr>
+																																			<tr>
+													<td>text</td>
+													<td>PHONE</td>
+												</tr>
+																																			<tr>
+													<td>Time (in sec)</td>
+													<td>0</td>
+												</tr>
+																																	</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+
+					
+				
+					
+					<div class='results' data-step-counter="5">
+						<ul class='nav nav-tabs sub-tabs'>
+							<li class='selected'>Result Details</li>
+
+														<li>Debug Properties</li>
+													</ul>
+						<div class='sub-results' style="display: none;">
+
+							<h3 class="page-header">Get context list</h3>
+
+														<div class='panel panel-success'>
+								<div class='panel-heading'>
+									<span class='glyphicon glyphicon-ok'></span>Passed
+								</div>
+							
+
+
+								<div class='panel-body'>
+									<div>Total Time: 0.515 Seconds</div>
+																</div>
+							</div>
+
+							<script type="text/javascript">
+							function toggleData(step) {
+                                var $btn = document.getElementById("expand-data-btn-"+step);
+                                var $expanded = document.getElementById("expand-data-"+step);
+                                var $collapsed = document.getElementById("collapse-data-"+step);
+                                var btn_class = $btn.className.split(" ");
+                                if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                    btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                    $collapsed.style.display="none";
+                                    $expanded.style.display="block";
+                                }
+                                else {
+                                    btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                    $collapsed.style.display="block";
+                                    $expanded.style.display="none";
+                                }
+                                $btn.className = btn_class.join(" ");
+                            }
+                            </script>
+							
+							
+							
+								
+																<div class='panel panel-default screenshot'>
+									<div class='panel-heading'>
+										Result Screenshot
+																				<a class="btn btn-default btn-xs pull-right dump-link" href="images/2.PNG" target="_blank">open</a>
+																			</div>
+									<div class='panel-body'>
+										<div class='img'>
+											<a href='images/2.PNG' target="_blank" >
+												<img src='images/2.PNG'/>
+											</a>
+										</div>
+									</div>
+								</div>
+								
+								
+												</div>
+
+
+                        <script type="text/javascript">
+
+                        function toggleParamsData(step) {
+
+                            var $btn = document.getElementById("expand-data-params-btn-" + step);
+                            var $collapsed = document.getElementById("collapse-data-params-" + step);
+                            var btn_class = $btn.className.split(" ");
+
+                            if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                $collapsed.style.display = "block";
+                            } else {
+                                btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                $collapsed.style.display = "none";
+                            }
+
+                            $btn.className = btn_class.join(" ");
+                        }
+
+                        </script>
+
+												<div class='sub-results'>
+
+						                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <button class="btn btn-default glyphicon glyphicon-plus btn-xs pull-left" style="outline:none" id="expand-data-params-btn-5" onclick="toggleParamsData(5)"></button>
+                                        Command Parameters
+                                </div>
+                                <div class="panel-body" id="collapse-data-params-5" style="display:none">
+                                                                    </div>
+                        </div>
+                        
+							<div class="panel panel-default">
+								<div class="panel-heading">Debug Properties</div>
+								<div class="panel-body">
+									<table class='table'>
+																				<tbody>
+																							<tr>
+													<td>Application Bounds</td>
+													<td>0,0,1440,2560</td>
+												</tr>
+																																			<tr>
+													<td>Client ID</td>
+													<td>clientID:jsonwp:version=1.00:ad82c2b7-c790-4643-bb52-8833782c062d</td>
+												</tr>
+																																			<tr>
+													<td>Console Output</td>
+													<td>Get context list</td>
+												</tr>
+																																			<tr>
+													<td>Device Name</td>
+													<td>adb:SM-G935F</td>
+												</tr>
+																																			<tr>
+													<td>End Time</td>
+													<td>Tue Dec 21 10:18:17 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Found</td>
+													<td>false</td>
+												</tr>
+																																			<tr>
+													<td>Image Height</td>
+													<td>711</td>
+												</tr>
+																																			<tr>
+													<td>Image Width</td>
+													<td>400</td>
+												</tr>
+																																			<tr>
+													<td>methodArgs</td>
+													<td>null</td>
+												</tr>
+																																			<tr>
+													<td>methodName</td>
+													<td>getContextList</td>
+												</tr>
+																																			<tr>
+													<td>Output File</td>
+													<td>c:\Automation\Python\test_automation\appium_automation\appium_reports\test2\images\2.PNG</td>
+												</tr>
+																																			<tr>
+													<td>Port</td>
+													<td>N/A</td>
+												</tr>
+																																			<tr>
+													<td>product.version</td>
+													<td>21.10.8524</td>
+												</tr>
+																																			<tr>
+													<td>Report</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Scenario Index</td>
+													<td>0</td>
+												</tr>
+																																			<tr>
+													<td>Screen Height</td>
+													<td>2560</td>
+												</tr>
+																																			<tr>
+													<td>Screen Width</td>
+													<td>1440</td>
+												</tr>
+																																			<tr>
+													<td>Start Time</td>
+													<td>Tue Dec 21 10:18:17 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Status</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Step</td>
+													<td>5</td>
+												</tr>
+																																			<tr>
+													<td>textArray</td>
+													<td>
+NATIVE_APP
+</td>
+												</tr>
+																																			<tr>
+													<td>Time (in sec)</td>
+													<td>0.52</td>
+												</tr>
+																																	</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+
+					
+				
+					
+					<div class='results' data-step-counter="6">
+						<ul class='nav nav-tabs sub-tabs'>
+							<li class='selected'>Result Details</li>
+
+														<li>Debug Properties</li>
+													</ul>
+						<div class='sub-results' style="display: none;">
+
+							<h3 class="page-header">Set property android.native.nonInstrumented to: true</h3>
+
+														<div class='panel panel-success'>
+								<div class='panel-heading'>
+									<span class='glyphicon glyphicon-ok'></span>Passed
+								</div>
+							
+
+
+								<div class='panel-body'>
+									<div>Total Time: 0.001 Seconds</div>
+																</div>
+							</div>
+
+							<script type="text/javascript">
+							function toggleData(step) {
+                                var $btn = document.getElementById("expand-data-btn-"+step);
+                                var $expanded = document.getElementById("expand-data-"+step);
+                                var $collapsed = document.getElementById("collapse-data-"+step);
+                                var btn_class = $btn.className.split(" ");
+                                if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                    btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                    $collapsed.style.display="none";
+                                    $expanded.style.display="block";
+                                }
+                                else {
+                                    btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                    $collapsed.style.display="block";
+                                    $expanded.style.display="none";
+                                }
+                                $btn.className = btn_class.join(" ");
+                            }
+                            </script>
+							
+							
+							
+								
+																<div class='panel panel-default screenshot'>
+									<div class='panel-heading'>
+										Result Screenshot
+																				<a class="btn btn-default btn-xs pull-right dump-link" href="images/3.PNG" target="_blank">open</a>
+																			</div>
+									<div class='panel-body'>
+										<div class='img'>
+											<a href='images/3.PNG' target="_blank" >
+												<img src='images/3.PNG'/>
+											</a>
+										</div>
+									</div>
+								</div>
+								
+								
+												</div>
+
+
+                        <script type="text/javascript">
+
+                        function toggleParamsData(step) {
+
+                            var $btn = document.getElementById("expand-data-params-btn-" + step);
+                            var $collapsed = document.getElementById("collapse-data-params-" + step);
+                            var btn_class = $btn.className.split(" ");
+
+                            if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                $collapsed.style.display = "block";
+                            } else {
+                                btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                $collapsed.style.display = "none";
+                            }
+
+                            $btn.className = btn_class.join(" ");
+                        }
+
+                        </script>
+
+												<div class='sub-results'>
+
+						
+							<div class="panel panel-default">
+								<div class="panel-heading">Debug Properties</div>
+								<div class="panel-body">
+									<table class='table'>
+																				<tbody>
+																							<tr>
+													<td>Application Bounds</td>
+													<td>0,0,1440,2560</td>
+												</tr>
+																																			<tr>
+													<td>Client ID</td>
+													<td>clientID:jsonwp:version=1.00:ad82c2b7-c790-4643-bb52-8833782c062d</td>
+												</tr>
+																																			<tr>
+													<td>Console Output</td>
+													<td>Set property android.native.nonInstrumented to: true</td>
+												</tr>
+																																			<tr>
+													<td>Device Name</td>
+													<td>adb:SM-G935F</td>
+												</tr>
+																																			<tr>
+													<td>End Time</td>
+													<td>Tue Dec 21 10:18:18 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Found</td>
+													<td>false</td>
+												</tr>
+																																			<tr>
+													<td>Image Height</td>
+													<td>711</td>
+												</tr>
+																																			<tr>
+													<td>Image Width</td>
+													<td>400</td>
+												</tr>
+																																			<tr>
+													<td>methodArgs</td>
+													<td>[Ljava.lang.Object;@168631a</td>
+												</tr>
+																																			<tr>
+													<td>methodName</td>
+													<td>setProperty</td>
+												</tr>
+																																			<tr>
+													<td>Output File</td>
+													<td>c:\Automation\Python\test_automation\appium_automation\appium_reports\test2\images\3.PNG</td>
+												</tr>
+																																			<tr>
+													<td>Port</td>
+													<td>N/A</td>
+												</tr>
+																																			<tr>
+													<td>product.version</td>
+													<td>21.10.8524</td>
+												</tr>
+																																			<tr>
+													<td>Report</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Scenario Index</td>
+													<td>0</td>
+												</tr>
+																																			<tr>
+													<td>Screen Height</td>
+													<td>2560</td>
+												</tr>
+																																			<tr>
+													<td>Screen Width</td>
+													<td>1440</td>
+												</tr>
+																																			<tr>
+													<td>Start Time</td>
+													<td>Tue Dec 21 10:18:18 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Status</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Step</td>
+													<td>6</td>
+												</tr>
+																																			<tr>
+													<td>Time (in sec)</td>
+													<td>0.01</td>
+												</tr>
+																																	</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+
+					
+				
+					
+					<div class='results' data-step-counter="7">
+						<ul class='nav nav-tabs sub-tabs'>
+							<li class='selected'>Result Details</li>
+
+														<li>Debug Properties</li>
+													</ul>
+						<div class='sub-results' style="display: none;">
+
+							<h3 class="page-header">Start writing device log for SM-G935F</h3>
+
+														<div class='panel panel-success'>
+								<div class='panel-heading'>
+									<span class='glyphicon glyphicon-ok'></span>Passed
+								</div>
+							
+
+
+								<div class='panel-body'>
+									<div>Total Time: 1.42 Seconds</div>
+																</div>
+							</div>
+
+							<script type="text/javascript">
+							function toggleData(step) {
+                                var $btn = document.getElementById("expand-data-btn-"+step);
+                                var $expanded = document.getElementById("expand-data-"+step);
+                                var $collapsed = document.getElementById("collapse-data-"+step);
+                                var btn_class = $btn.className.split(" ");
+                                if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                    btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                    $collapsed.style.display="none";
+                                    $expanded.style.display="block";
+                                }
+                                else {
+                                    btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                    $collapsed.style.display="block";
+                                    $expanded.style.display="none";
+                                }
+                                $btn.className = btn_class.join(" ");
+                            }
+                            </script>
+														<div class="panel panel-default">
+																	<div class="panel-heading">Result Data</div>
+									<div class="panel-body">Writing device log to C:\Users\Saed\AppData\Local\Temp\AppiumStudio\deviceLogs_16400746983037986271262342958942.log</div>
+															</div>
+							
+							
+							
+								
+								
+								
+												</div>
+
+
+                        <script type="text/javascript">
+
+                        function toggleParamsData(step) {
+
+                            var $btn = document.getElementById("expand-data-params-btn-" + step);
+                            var $collapsed = document.getElementById("collapse-data-params-" + step);
+                            var btn_class = $btn.className.split(" ");
+
+                            if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                $collapsed.style.display = "block";
+                            } else {
+                                btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                $collapsed.style.display = "none";
+                            }
+
+                            $btn.className = btn_class.join(" ");
+                        }
+
+                        </script>
+
+												<div class='sub-results'>
+
+						
+							<div class="panel panel-default">
+								<div class="panel-heading">Debug Properties</div>
+								<div class="panel-body">
+									<table class='table'>
+																				<tbody>
+																							<tr>
+													<td>Client ID</td>
+													<td>clientID:jsonwp:version=1.00:ad82c2b7-c790-4643-bb52-8833782c062d</td>
+												</tr>
+																																			<tr>
+													<td>Console Output</td>
+													<td>Start writing device log for SM-G935F</td>
+												</tr>
+																																			<tr>
+													<td>Device Name</td>
+													<td>adb:SM-G935F</td>
+												</tr>
+																																			<tr>
+													<td>End Time</td>
+													<td>Tue Dec 21 10:18:19 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Found</td>
+													<td>false</td>
+												</tr>
+																																			<tr>
+													<td>methodArgs</td>
+													<td>[Ljava.lang.Object;@be8a3</td>
+												</tr>
+																																			<tr>
+													<td>methodName</td>
+													<td>startLoggingDevice</td>
+												</tr>
+																																			<tr>
+													<td>Port</td>
+													<td>N/A</td>
+												</tr>
+																																			<tr>
+													<td>product.version</td>
+													<td>21.10.8524</td>
+												</tr>
+																																			<tr>
+													<td>Report</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Scenario Index</td>
+													<td>0</td>
+												</tr>
+																																			<tr>
+													<td>Start Time</td>
+													<td>Tue Dec 21 10:18:18 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Status</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Step</td>
+													<td>7</td>
+												</tr>
+																																			<tr>
+													<td>text</td>
+													<td>Writing device log to C:\Users\Saed\AppData\Local\Temp\AppiumStudio\deviceLogs_16400746983037986271262342958942.log</td>
+												</tr>
+																																			<tr>
+													<td>Time (in sec)</td>
+													<td>1.42</td>
+												</tr>
+																																	</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+
+					
+				
+					
+					<div class='results' data-step-counter="8">
+						<ul class='nav nav-tabs sub-tabs'>
+							<li class='selected'>Result Details</li>
+
+														<li>Debug Properties</li>
+													</ul>
+						<div class='sub-results' style="display: none;">
+
+							<h3 class="page-header">Launch native activity / URL com.example.android.apis/.ApiDemos</h3>
+
+														<div class='panel panel-success'>
+								<div class='panel-heading'>
+									<span class='glyphicon glyphicon-ok'></span>Passed
+								</div>
+							
+
+
+								<div class='panel-body'>
+									<div>Total Time: 3.736 Seconds</div>
+																</div>
+							</div>
+
+							<script type="text/javascript">
+							function toggleData(step) {
+                                var $btn = document.getElementById("expand-data-btn-"+step);
+                                var $expanded = document.getElementById("expand-data-"+step);
+                                var $collapsed = document.getElementById("collapse-data-"+step);
+                                var btn_class = $btn.className.split(" ");
+                                if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                    btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                    $collapsed.style.display="none";
+                                    $expanded.style.display="block";
+                                }
+                                else {
+                                    btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                    $collapsed.style.display="block";
+                                    $expanded.style.display="none";
+                                }
+                                $btn.className = btn_class.join(" ");
+                            }
+                            </script>
+							
+							
+							
+								
+																<div class='panel panel-default screenshot'>
+									<div class='panel-heading'>
+										Result Screenshot
+																				<a class="btn btn-default btn-xs pull-right dump-link" href="images/4.PNG" target="_blank">open</a>
+																			</div>
+									<div class='panel-body'>
+										<div class='img'>
+											<a href='images/4.PNG' target="_blank" >
+												<img src='images/4.PNG'/>
+											</a>
+										</div>
+									</div>
+								</div>
+								
+								
+												</div>
+
+
+                        <script type="text/javascript">
+
+                        function toggleParamsData(step) {
+
+                            var $btn = document.getElementById("expand-data-params-btn-" + step);
+                            var $collapsed = document.getElementById("collapse-data-params-" + step);
+                            var btn_class = $btn.className.split(" ");
+
+                            if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                $collapsed.style.display = "block";
+                            } else {
+                                btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                $collapsed.style.display = "none";
+                            }
+
+                            $btn.className = btn_class.join(" ");
+                        }
+
+                        </script>
+
+												<div class='sub-results'>
+
+						                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <button class="btn btn-default glyphicon glyphicon-plus btn-xs pull-left" style="outline:none" id="expand-data-params-btn-8" onclick="toggleParamsData(8)"></button>
+                                        Command Parameters
+                                </div>
+                                <div class="panel-body" id="collapse-data-params-8" style="display:none">
+                                                                            Activity/URL
+                                        :
+                                        com.example.android.apis/.ApiDemos
+                                        <br />
+                                                                            Instrument
+                                        :
+                                        false
+                                        <br />
+                                                                            Stop If Running
+                                        :
+                                        true
+                                        <br />
+                                                                    </div>
+                        </div>
+                        
+							<div class="panel panel-default">
+								<div class="panel-heading">Debug Properties</div>
+								<div class="panel-body">
+									<table class='table'>
+																				<tbody>
+																							<tr>
+													<td>Application Bounds</td>
+													<td>0,0,1440,2560</td>
+												</tr>
+																																			<tr>
+													<td>Client ID</td>
+													<td>clientID:jsonwp:version=1.00:ad82c2b7-c790-4643-bb52-8833782c062d</td>
+												</tr>
+																																			<tr>
+													<td>Console Output</td>
+													<td>Launch native activity / URL com.example.android.apis/.ApiDemos</td>
+												</tr>
+																																			<tr>
+													<td>Device Name</td>
+													<td>adb:SM-G935F</td>
+												</tr>
+																																			<tr>
+													<td>End Time</td>
+													<td>Tue Dec 21 10:18:23 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Found</td>
+													<td>false</td>
+												</tr>
+																																			<tr>
+													<td>Image Height</td>
+													<td>711</td>
+												</tr>
+																																			<tr>
+													<td>Image Width</td>
+													<td>400</td>
+												</tr>
+																																			<tr>
+													<td>methodArgs</td>
+													<td>[Ljava.lang.Object;@8ce2c2</td>
+												</tr>
+																																			<tr>
+													<td>methodName</td>
+													<td>launch</td>
+												</tr>
+																																			<tr>
+													<td>Output File</td>
+													<td>c:\Automation\Python\test_automation\appium_automation\appium_reports\test2\images\4.PNG</td>
+												</tr>
+																																			<tr>
+													<td>Port</td>
+													<td>N/A</td>
+												</tr>
+																																			<tr>
+													<td>product.version</td>
+													<td>21.10.8524</td>
+												</tr>
+																																			<tr>
+													<td>Report</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Scenario Index</td>
+													<td>0</td>
+												</tr>
+																																			<tr>
+													<td>Screen Height</td>
+													<td>2560</td>
+												</tr>
+																																			<tr>
+													<td>Screen Width</td>
+													<td>1440</td>
+												</tr>
+																																			<tr>
+													<td>Start Time</td>
+													<td>Tue Dec 21 10:18:19 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Status</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Step</td>
+													<td>8</td>
+												</tr>
+																																			<tr>
+													<td>Time (in sec)</td>
+													<td>3.74</td>
+												</tr>
+																																	</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+
+					
+				
+					
+					<div class='results' data-step-counter="9">
+						<ul class='nav nav-tabs sub-tabs'>
+							<li class='selected'>Result Details</li>
+
+														<li>Debug Properties</li>
+													</ul>
+						<div class='sub-results' style="display: none;">
+
+							<h3 class="page-header">Device Action: wake</h3>
+
+														<div class='panel panel-success'>
+								<div class='panel-heading'>
+									<span class='glyphicon glyphicon-ok'></span>Passed
+								</div>
+							
+
+
+								<div class='panel-body'>
+									<div>Total Time: 0.01 Seconds</div>
+																</div>
+							</div>
+
+							<script type="text/javascript">
+							function toggleData(step) {
+                                var $btn = document.getElementById("expand-data-btn-"+step);
+                                var $expanded = document.getElementById("expand-data-"+step);
+                                var $collapsed = document.getElementById("collapse-data-"+step);
+                                var btn_class = $btn.className.split(" ");
+                                if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                    btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                    $collapsed.style.display="none";
+                                    $expanded.style.display="block";
+                                }
+                                else {
+                                    btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                    $collapsed.style.display="block";
+                                    $expanded.style.display="none";
+                                }
+                                $btn.className = btn_class.join(" ");
+                            }
+                            </script>
+							
+							
+							
+								
+								
+								
+												</div>
+
+
+                        <script type="text/javascript">
+
+                        function toggleParamsData(step) {
+
+                            var $btn = document.getElementById("expand-data-params-btn-" + step);
+                            var $collapsed = document.getElementById("collapse-data-params-" + step);
+                            var btn_class = $btn.className.split(" ");
+
+                            if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                $collapsed.style.display = "block";
+                            } else {
+                                btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                $collapsed.style.display = "none";
+                            }
+
+                            $btn.className = btn_class.join(" ");
+                        }
+
+                        </script>
+
+												<div class='sub-results'>
+
+						                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <button class="btn btn-default glyphicon glyphicon-plus btn-xs pull-left" style="outline:none" id="expand-data-params-btn-9" onclick="toggleParamsData(9)"></button>
+                                        Command Parameters
+                                </div>
+                                <div class="panel-body" id="collapse-data-params-9" style="display:none">
+                                                                            Action
+                                        :
+                                        wake
+                                        <br />
+                                                                    </div>
+                        </div>
+                        
+							<div class="panel panel-default">
+								<div class="panel-heading">Debug Properties</div>
+								<div class="panel-body">
+									<table class='table'>
+																				<tbody>
+																							<tr>
+													<td>Client ID</td>
+													<td>clientID:jsonwp:version=1.00:ad82c2b7-c790-4643-bb52-8833782c062d</td>
+												</tr>
+																																			<tr>
+													<td>Console Output</td>
+													<td>Device Action: wake</td>
+												</tr>
+																																			<tr>
+													<td>Device Name</td>
+													<td>adb:SM-G935F</td>
+												</tr>
+																																			<tr>
+													<td>End Time</td>
+													<td>Tue Dec 21 10:18:25 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Found</td>
+													<td>false</td>
+												</tr>
+																																			<tr>
+													<td>methodArgs</td>
+													<td>[Ljava.lang.Object;@5930e4</td>
+												</tr>
+																																			<tr>
+													<td>methodName</td>
+													<td>deviceAction</td>
+												</tr>
+																																			<tr>
+													<td>Port</td>
+													<td>N/A</td>
+												</tr>
+																																			<tr>
+													<td>product.version</td>
+													<td>21.10.8524</td>
+												</tr>
+																																			<tr>
+													<td>Report</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Scenario Index</td>
+													<td>0</td>
+												</tr>
+																																			<tr>
+													<td>Start Time</td>
+													<td>Tue Dec 21 10:18:25 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Status</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Step</td>
+													<td>9</td>
+												</tr>
+																																			<tr>
+													<td>Time (in sec)</td>
+													<td>0.01</td>
+												</tr>
+																																	</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+
+					
+				
+					
+					
+					
+				
+					
+					<div class='results' data-step-counter="11">
+						<ul class='nav nav-tabs sub-tabs'>
+							<li class='selected'>Result Details</li>
+
+														<li>Debug Properties</li>
+													</ul>
+						<div class='sub-results' style="display: none;">
+
+							<h3 class="page-header">Start Activity [com.example.ExperiBank,.LoginActivity]</h3>
+
+														<div class='panel panel-danger'>
+								<div class='panel-heading'>
+									<span class='glyphicon glyphicon-remove'></span>Failed
+								</div>
+
+							
+
+
+								<div class='panel-body'>
+									<div>Total Time: 0.001 Seconds</div>
+																</div>
+							</div>
+
+							<script type="text/javascript">
+							function toggleData(step) {
+                                var $btn = document.getElementById("expand-data-btn-"+step);
+                                var $expanded = document.getElementById("expand-data-"+step);
+                                var $collapsed = document.getElementById("collapse-data-"+step);
+                                var btn_class = $btn.className.split(" ");
+                                if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                    btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                    $collapsed.style.display="none";
+                                    $expanded.style.display="block";
+                                }
+                                else {
+                                    btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                    $collapsed.style.display="block";
+                                    $expanded.style.display="none";
+                                }
+                                $btn.className = btn_class.join(" ");
+                            }
+                            </script>
+														<div class="panel panel-default">
+																	<div class="panel-heading">Result Data</div>
+									<div class="panel-body">{message=Exception of type 'java.lang.NullPointerException' : Unknown Exception message (null)}</div>
+															</div>
+							
+							
+							
+								
+																<div class='panel panel-default screenshot'>
+									<div class='panel-heading'>
+										Result Screenshot
+																				<a class="btn btn-default btn-xs pull-right dump-link" href="images/5.PNG" target="_blank">open</a>
+																			</div>
+									<div class='panel-body'>
+										<div class='img'>
+											<a href='images/5.PNG' target="_blank" >
+												<img src='images/5.PNG'/>
+											</a>
+										</div>
+									</div>
+								</div>
+								
+								
+												</div>
+
+
+                        <script type="text/javascript">
+
+                        function toggleParamsData(step) {
+
+                            var $btn = document.getElementById("expand-data-params-btn-" + step);
+                            var $collapsed = document.getElementById("collapse-data-params-" + step);
+                            var btn_class = $btn.className.split(" ");
+
+                            if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                $collapsed.style.display = "block";
+                            } else {
+                                btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                $collapsed.style.display = "none";
+                            }
+
+                            $btn.className = btn_class.join(" ");
+                        }
+
+                        </script>
+
+												<div class='sub-results'>
+
+						                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <button class="btn btn-default glyphicon glyphicon-plus btn-xs pull-left" style="outline:none" id="expand-data-params-btn-11" onclick="toggleParamsData(11)"></button>
+                                        Command Parameters
+                                </div>
+                                <div class="panel-body" id="collapse-data-params-11" style="display:none">
+                                                                            appActivity
+                                        :
+                                        .LoginActivity
+                                        <br />
+                                                                            appPackage
+                                        :
+                                        com.example.ExperiBank
+                                        <br />
+                                                                            sessionId
+                                        :
+                                        ad82c2b7-c790-4643-bb52-8833782c062d
+                                        <br />
+                                                                    </div>
+                        </div>
+                        
+							<div class="panel panel-default">
+								<div class="panel-heading">Debug Properties</div>
+								<div class="panel-body">
+									<table class='table'>
+																				<tbody>
+																							<tr>
+													<td>Application Bounds</td>
+													<td>0,0,1440,2560</td>
+												</tr>
+																																			<tr>
+													<td>Client ID</td>
+													<td>clientID:jsonwp:version=1.00:ad82c2b7-c790-4643-bb52-8833782c062d</td>
+												</tr>
+																																			<tr>
+													<td>Console Output</td>
+													<td>Start Activity [com.example.ExperiBank,.LoginActivity]</td>
+												</tr>
+																																			<tr>
+													<td>Device Name</td>
+													<td>adb:SM-G935F</td>
+												</tr>
+																																			<tr>
+													<td>End Time</td>
+													<td>Tue Dec 21 10:18:25 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Found</td>
+													<td>false</td>
+												</tr>
+																																			<tr>
+													<td>Image Height</td>
+													<td>711</td>
+												</tr>
+																																			<tr>
+													<td>Image Width</td>
+													<td>400</td>
+												</tr>
+																																			<tr>
+													<td>Output File</td>
+													<td>c:\Automation\Python\test_automation\appium_automation\appium_reports\test2\images\5.PNG</td>
+												</tr>
+																																			<tr>
+													<td>Port</td>
+													<td>N/A</td>
+												</tr>
+																																			<tr>
+													<td>product.version</td>
+													<td>21.10.8524</td>
+												</tr>
+																																			<tr>
+													<td>Report</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Scenario Index</td>
+													<td>0</td>
+												</tr>
+																																			<tr>
+													<td>Screen Height</td>
+													<td>2560</td>
+												</tr>
+																																			<tr>
+													<td>Screen Width</td>
+													<td>1440</td>
+												</tr>
+																																			<tr>
+													<td>Start Time</td>
+													<td>Tue Dec 21 10:18:25 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Status</td>
+													<td>false</td>
+												</tr>
+																																			<tr>
+													<td>Step</td>
+													<td>11</td>
+												</tr>
+																																			<tr>
+													<td>text</td>
+													<td>{message=Exception of type 'java.lang.NullPointerException' : Unknown Exception message (null)}</td>
+												</tr>
+																																			<tr>
+													<td>Time (in sec)</td>
+													<td>0.01</td>
+												</tr>
+																																	</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+
+					
+				
+					
+					<div class='results' data-step-counter="12">
+						<ul class='nav nav-tabs sub-tabs'>
+							<li class='selected'>Result Details</li>
+
+														<li>Debug Properties</li>
+													</ul>
+						<div class='sub-results' style="display: none;">
+
+							<h3 class="page-header">Quit</h3>
+
+														<div class='panel panel-success'>
+								<div class='panel-heading'>
+									<span class='glyphicon glyphicon-ok'></span>Passed
+								</div>
+							
+
+
+								<div class='panel-body'>
+									<div>Total Time: 0.972 Seconds</div>
+																</div>
+							</div>
+
+							<script type="text/javascript">
+							function toggleData(step) {
+                                var $btn = document.getElementById("expand-data-btn-"+step);
+                                var $expanded = document.getElementById("expand-data-"+step);
+                                var $collapsed = document.getElementById("collapse-data-"+step);
+                                var btn_class = $btn.className.split(" ");
+                                if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                    btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                    $collapsed.style.display="none";
+                                    $expanded.style.display="block";
+                                }
+                                else {
+                                    btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                    $collapsed.style.display="block";
+                                    $expanded.style.display="none";
+                                }
+                                $btn.className = btn_class.join(" ");
+                            }
+                            </script>
+							
+							
+							
+								
+																<div class='panel panel-default screenshot'>
+									<div class='panel-heading'>
+										Result Screenshot
+																				<a class="btn btn-default btn-xs pull-right dump-link" href="images/6.PNG" target="_blank">open</a>
+																			</div>
+									<div class='panel-body'>
+										<div class='img'>
+											<a href='images/6.PNG' target="_blank" >
+												<img src='images/6.PNG'/>
+											</a>
+										</div>
+									</div>
+								</div>
+								
+								
+												</div>
+
+
+                        <script type="text/javascript">
+
+                        function toggleParamsData(step) {
+
+                            var $btn = document.getElementById("expand-data-params-btn-" + step);
+                            var $collapsed = document.getElementById("collapse-data-params-" + step);
+                            var btn_class = $btn.className.split(" ");
+
+                            if (btn_class.indexOf("glyphicon-plus") > -1) {
+                                btn_class[btn_class.indexOf("glyphicon-plus")] = "glyphicon-minus";
+                                $collapsed.style.display = "block";
+                            } else {
+                                btn_class[btn_class.indexOf("glyphicon-minus")] = "glyphicon-plus";
+                                $collapsed.style.display = "none";
+                            }
+
+                            $btn.className = btn_class.join(" ");
+                        }
+
+                        </script>
+
+												<div class='sub-results'>
+
+						                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <button class="btn btn-default glyphicon glyphicon-plus btn-xs pull-left" style="outline:none" id="expand-data-params-btn-12" onclick="toggleParamsData(12)"></button>
+                                        Command Parameters
+                                </div>
+                                <div class="panel-body" id="collapse-data-params-12" style="display:none">
+                                                                            sessionId
+                                        :
+                                        ad82c2b7-c790-4643-bb52-8833782c062d
+                                        <br />
+                                                                    </div>
+                        </div>
+                        
+							<div class="panel panel-default">
+								<div class="panel-heading">Debug Properties</div>
+								<div class="panel-body">
+									<table class='table'>
+																				<tbody>
+																							<tr>
+													<td>Application Bounds</td>
+													<td>0,0,1440,2560</td>
+												</tr>
+																																			<tr>
+													<td>Client ID</td>
+													<td>clientID:jsonwp:version=1.00:ad82c2b7-c790-4643-bb52-8833782c062d</td>
+												</tr>
+																																			<tr>
+													<td>Console Output</td>
+													<td>Quit</td>
+												</tr>
+																																			<tr>
+													<td>Device Name</td>
+													<td>adb:SM-G935F</td>
+												</tr>
+																																			<tr>
+													<td>End Time</td>
+													<td>Tue Dec 21 10:18:26 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Found</td>
+													<td>false</td>
+												</tr>
+																																			<tr>
+													<td>Image Height</td>
+													<td>711</td>
+												</tr>
+																																			<tr>
+													<td>Image Width</td>
+													<td>400</td>
+												</tr>
+																																			<tr>
+													<td>Output File</td>
+													<td>c:\Automation\Python\test_automation\appium_automation\appium_reports\test2\images\6.PNG</td>
+												</tr>
+																																			<tr>
+													<td>Port</td>
+													<td>N/A</td>
+												</tr>
+																																			<tr>
+													<td>product.version</td>
+													<td>21.10.8524</td>
+												</tr>
+																																			<tr>
+													<td>Report</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Scenario Index</td>
+													<td>0</td>
+												</tr>
+																																			<tr>
+													<td>Screen Height</td>
+													<td>2560</td>
+												</tr>
+																																			<tr>
+													<td>Screen Width</td>
+													<td>1440</td>
+												</tr>
+																																			<tr>
+													<td>Start Time</td>
+													<td>Tue Dec 21 10:18:25 IST 2021</td>
+												</tr>
+																																			<tr>
+													<td>Status</td>
+													<td>true</td>
+												</tr>
+																																			<tr>
+													<td>Step</td>
+													<td>12</td>
+												</tr>
+																																			<tr>
+													<td>Time (in sec)</td>
+													<td>0.98</td>
+												</tr>
+																																	</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+
+					
+				
+			</div>
+		</div>
+	</body>
+</html>

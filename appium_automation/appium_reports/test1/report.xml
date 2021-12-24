@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<test_report>
+<info>
+<test_info>
+<test_status>Failed</test_status>
+<time_zone>Israel Standard Time</time_zone>
+<run_started>Tue, 21 Dec 2021 10:16:59</run_started>
+<total_time>00:00:10.609</total_time>
+<project/>
+<user>Saed</user>
+<machine_name>DESKTOP-LVSINNE</machine_name>
+</test_info>
+<device_info>
+<device_name>SM-G935F</device_name>
+<manufacture>samsung</manufacture>
+<model>SM-G935F</model>
+<os>Android</os>
+<serial_number>ce051605b5d4d82c03</serial_number>
+<version>8.0.0</version>
+<versionMajor>8.x</versionMajor>
+<screen_size>1440x2560</screen_size>
+</device_info>
+</info>
+<reports>
+<report>
+<line>Start steps group 'New Session [android]'</line>
+<status>true</status>
+</report>
+<report>
+<imageFile>0.PNG</imageFile>
+<text>{appPackage=com.example.android.apis, device.majorVersion=8, dontGoHomeOnQuit=false, device.os=Android, noReset=false, dontStopAppOnReset=false, applicationClearData=false, reservationDuration=240, reportFormat=xml, fullReset=false, deviceUDID=ce051605b5d4d82c03, install.only.for.update=false, desired={appPackage=com.example.android.apis, appActivity=.ApiDemos, reportDirectory=c:/Automation/Python/test_automation/appium_automation/appium_reports, reportFormat=xml, udid=ce051605b5d4d82c03, platformName=android, testName=appium.xml}, device.serialNumber=ce051605b5d4d82c03, locationServicesAuthorized=false, device.version=8.0.0, reportDirectory=c:/Automation/Python/test_automation/appium_automation/appium_reports, autoWebview=false, udid=ce051605b5d4d82c03, platformName=android, testName=appium.xml, device.screenSize=1440x2560, useKeystore=false, test.type=Mobile, commandTimeouts=120000, device.manufacture=samsung, instrumentApp=false, appiumVersion=1.8.0, autoDismissAlerts=false, reportUrl=c:\Automation\Python\test_automation\appium_automation\appium_reports\test1, newSessionWaitTimeout=600, keystorePath=~/.android/debug.keystore, appActivity=.ApiDemos, installOnlyForUpdate=false, waitForDeviceTimeout=120000, device.model=SM-G935F, device.name=SM-G935F, autoGrantPermissions=false, appBuildVersion=, appReleaseVersion=, takeScreenshots=true, projectName=, autoAcceptAlerts=false}</text>
+<line>Init Actual Capabilities</line>
+<status>true</status>
+</report>
+<report>
+<imageFile>1.PNG</imageFile>
+<text>NATIVE_APP</text>
+<line>Init Context [NATIVE_APP]</line>
+<status>true</status>
+</report>
+<report>
+<text>PHONE</text>
+<line>Get device property: device.category</line>
+<status>true</status>
+</report>
+<report>
+<imageFile>2.PNG</imageFile>
+<line>Get context list</line>
+<status>true</status>
+</report>
+<report>
+<imageFile>3.PNG</imageFile>
+<line>Set property android.native.nonInstrumented to: true</line>
+<status>true</status>
+</report>
+<report>
+<text>Writing device log to C:\Users\Saed\AppData\Local\Temp\AppiumStudio\deviceLogs_16400746216396172817765123859893.log</text>
+<line>Start writing device log for SM-G935F</line>
+<status>true</status>
+</report>
+<report>
+<imageFile>4.PNG</imageFile>
+<line>Launch native activity / URL com.example.android.apis/.ApiDemos</line>
+<status>true</status>
+</report>
+<report>
+<line>Device Action: wake</line>
+<status>true</status>
+</report>
+<report>
+<line>Stop steps group</line>
+<status>true</status>
+</report>
+<report>
+<imageFile>5.PNG</imageFile>
+<text>{message=Exception of type 'java.lang.NullPointerException' : Unknown Exception message (null)}</text>
+<line>Start Activity [com.example.ExperiBank,.LoginActivity]</line>
+<status>false</status>
+</report>
+<report>
+<imageFile>6.PNG</imageFile>
+<line>Quit</line>
+<status>true</status>
+</report>
+</reports>
+</test_report>

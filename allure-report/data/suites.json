@@ -1,0 +1,34 @@
+{
+  "uid" : "98d3104e051c652961429bf95fa0b5d6",
+  "name" : "suites",
+  "children" : [ {
+    "name" : "cl_automation",
+    "children" : [ {
+      "name" : "test_imdb",
+      "children" : [ {
+        "name" : "Test_Imdb",
+        "children" : [ {
+          "name" : "test_verify_imdb",
+          "uid" : "cd0a38ff6d696d47",
+          "parentUid" : "2cabc0830eeb34cd6f664022cb88a678",
+          "status" : "broken",
+          "time" : {
+            "start" : 1640337223753,
+            "stop" : 1640337223753,
+            "duration" : 0
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "newPassed" : false,
+          "newBroken" : false,
+          "retriesCount" : 15,
+          "retriesStatusChange" : true,
+          "parameters" : [ ]
+        } ],
+        "uid" : "2cabc0830eeb34cd6f664022cb88a678"
+      } ],
+      "uid" : "b06735e232a470ceff62612499f0b8ea"
+    } ],
+    "uid" : "35b2cdad5f7b776e75187d1ace50ada5"
+  } ]
+}

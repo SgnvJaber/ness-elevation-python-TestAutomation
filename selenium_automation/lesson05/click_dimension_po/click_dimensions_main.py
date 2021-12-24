@@ -14,23 +14,24 @@ from selenium_automation.lesson05.click_dimension_po.regional_partner import Reg
 partner_search = "C-ven Technologies"
 
 
-class Test_Actions_Ex:
+class Test_Click_Dimension:
+    global driver
     driver = webdriver.Chrome(ChromeDriverManager().install())
     nav = Navbar(driver)
     rp = Regional_Partner(driver)
     action = ActionChains(driver)
 
     def setup_class(cls):
-        cls.driver.maximize_window()
-        cls.driver.get("https://clickdimensions.com")
-        cls.driver.implicitly_wait(10)
+        driver.maximize_window()
+        driver.get("https://clickdimensions.com")
+        driver.implicitly_wait(10)
 
     def teardown_class(cls):
-        cls.driver.quit()
+        driver.quit()
 
     def attach_file(self, name):
         image = "./screen-shots/" + name + ".png"  # need to create folder: screen-shots first
-        self.driver.get_screenshot_as_file(image)
+        driver.get_screenshot_as_file(image)
         allure.attach.file(image, attachment_type=allure.attachment_type.PNG)
 
     @allure.title("Verify Partner exist in Central America")
@@ -45,6 +46,6 @@ class Test_Actions_Ex:
         self.nav.technology_section().click()
         self.nav.popup_ignore().click()
         self.nav.explore_regional().click()
-        self.driver.set_page_load_timeout(5)
+        driver.set_page_load_timeout(5)
         list = self.rp.get_partner_if_exist_in_central(partner)
         return list

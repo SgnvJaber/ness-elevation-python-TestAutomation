@@ -1,0 +1,43 @@
+1639922730647	geckodriver	INFO	Listening on 127.0.0.1:63943
+1639922733666	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63944" "-no-remote" "-profile" "C:\\Users\\Saed\\AppData\\Local\\Temp\\rust_mozprofilelooN7o"
+1639922734109	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Saed\\AppData\\Local\\Temp\\rust_mozprofilelooN7o\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:63944/devtools/browser/a94d4ec6-1b17-455a-9928-10f564ea86a8
+1639922735996	Marionette	INFO	Listening on port 63949
+1639922736303	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1639922739530	Marionette	INFO	Stopped listening on port 63949
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639922746307	geckodriver	INFO	Listening on 127.0.0.1:63993
+1639922749335	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63994" "-no-remote" "-profile" "C:\\Users\\Saed\\AppData\\Local\\Temp\\rust_mozprofile333pHJ"
+1639922749562	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Saed\\AppData\\Local\\Temp\\rust_mozprofile333pHJ\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:63994/devtools/browser/f821ca8f-fa17-4fce-a6c7-cdd57e62763f
+1639922751132	Marionette	INFO	Listening on port 63999
+1639922751358	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1639922754353	Marionette	INFO	Stopped listening on port 63999
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639930763785	geckodriver	INFO	Listening on 127.0.0.1:49754
+1639930766809	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49755" "-no-remote" "-profile" "C:\\Users\\Saed\\AppData\\Local\\Temp\\rust_mozprofilegrj2Qk"
+1639930767216	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Saed\\AppData\\Local\\Temp\\rust_mozprofilegrj2Qk\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:49755/devtools/browser/76c29efb-1ad5-4530-8492-62701613a5c6
+1639930768946	Marionette	INFO	Listening on port 49761
+1639930769436	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1639930784641	Marionette	INFO	Stopped listening on port 49761
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1639983994765	geckodriver	INFO	Listening on 127.0.0.1:58229
+1639983997776	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "58230" "-no-remote" "-profile" "C:\\Users\\Saed\\AppData\\Local\\Temp\\rust_mozprofileVluObK"
+1639983998199	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Saed\\AppData\\Local\\Temp\\rust_mozprofileVluObK\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:58230/devtools/browser/00d6421a-dcd4-43f4-98bd-34784f395ce6
+1639984000134	Marionette	INFO	Listening on port 58235
+1639984000399	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1639984007346	Marionette	INFO	Stopped listening on port 58235
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+

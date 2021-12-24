@@ -51,3 +51,25 @@ DevTools listening on ws://localhost:57576/devtools/browser/2c1f1431-64a2-4074-a
 
 ###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
+1639922949033	geckodriver	INFO	Listening on 127.0.0.1:64139
+1639922952050	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64140" "-no-remote" "-profile" "C:\\Users\\Saed\\AppData\\Local\\Temp\\rust_mozprofile6TrrUZ"
+1639922952312	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Saed\\AppData\\Local\\Temp\\rust_mozprofile6TrrUZ\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:64140/devtools/browser/c3b23782-f9d2-4dae-ad18-917083f6206d
+1639922953893	Marionette	INFO	Listening on port 64147
+1639922954068	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1639922955832	Marionette	INFO	Stopped listening on port 64147
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1639985700589	geckodriver	INFO	Listening on 127.0.0.1:58473
+1639985703594	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "58474" "-no-remote" "-profile" "C:\\Users\\Saed\\AppData\\Local\\Temp\\rust_mozprofilelP95SL"
+1639985703845	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Saed\\AppData\\Local\\Temp\\rust_mozprofilelP95SL\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:58474/devtools/browser/4b811957-4025-4f37-bc18-53a5defff181
+1639985705541	Marionette	INFO	Listening on port 58479
+1639985705613	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1639985707239	Marionette	INFO	Stopped listening on port 58479
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+

@@ -1,0 +1,11 @@
+[ {
+  "uid" : "cd0a38ff6d696d47",
+  "name" : "test_verify_imdb",
+  "time" : {
+    "start" : 1640337223753,
+    "stop" : 1640337223753,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "severity" : "normal"
+} ]
