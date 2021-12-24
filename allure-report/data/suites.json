@@ -9,19 +9,19 @@
         "name" : "Test_Imdb",
         "children" : [ {
           "name" : "test_verify_imdb",
-          "uid" : "cd0a38ff6d696d47",
+          "uid" : "b1689e8ce94ff01",
           "parentUid" : "2cabc0830eeb34cd6f664022cb88a678",
-          "status" : "broken",
+          "status" : "passed",
           "time" : {
-            "start" : 1640337223753,
-            "stop" : 1640337223753,
-            "duration" : 0
+            "start" : 1640349933412,
+            "stop" : 1640349936008,
+            "duration" : 2596
           },
           "flaky" : false,
           "newFailed" : false,
           "newPassed" : false,
           "newBroken" : false,
-          "retriesCount" : 15,
+          "retriesCount" : 26,
           "retriesStatusChange" : true,
           "parameters" : [ ]
         } ],

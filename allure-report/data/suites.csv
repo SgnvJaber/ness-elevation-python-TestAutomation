@@ -1,2 +1,2 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"broken","Fri Dec 24 11:13:43 IST 2021","Fri Dec 24 11:13:43 IST 2021","0","cl_automation","test_imdb","Test_Imdb","","","test_verify_imdb",""
+"passed","Fri Dec 24 14:45:33 IST 2021","Fri Dec 24 14:45:36 IST 2021","2596","cl_automation","test_imdb","Test_Imdb","","","test_verify_imdb",""

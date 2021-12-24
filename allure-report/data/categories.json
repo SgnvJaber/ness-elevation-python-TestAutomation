@@ -1,30 +1,5 @@
 {
   "uid" : "4b4757e66a1912dae1a509f688f20b0f",
   "name" : "categories",
-  "children" : [ {
-    "name" : "Test defects",
-    "children" : [ {
-      "name" : "TypeError: Level not an integer or a valid string: None",
-      "children" : [ {
-        "name" : "test_verify_imdb",
-        "uid" : "cd0a38ff6d696d47",
-        "parentUid" : "3bc6f18011f4f61d5cbff56ba69b599c",
-        "status" : "broken",
-        "time" : {
-          "start" : 1640337223753,
-          "stop" : 1640337223753,
-          "duration" : 0
-        },
-        "flaky" : false,
-        "newFailed" : false,
-        "newPassed" : false,
-        "newBroken" : false,
-        "retriesCount" : 15,
-        "retriesStatusChange" : true,
-        "parameters" : [ ]
-      } ],
-      "uid" : "3bc6f18011f4f61d5cbff56ba69b599c"
-    } ],
-    "uid" : "bdbf199525818fae7a8651db9eafe741"
-  } ]
+  "children" : [ ]
 }

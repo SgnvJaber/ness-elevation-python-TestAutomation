@@ -1,0 +1,119 @@
+{
+  "uid" : "f79ee49ca9c970e5",
+  "name" : "test_verify_imdb",
+  "fullName" : "cl_automation.test_imdb.Test_Imdb#test_verify_imdb",
+  "historyId" : "7e6acdfca12b03649f7ae8ee564f71d3",
+  "time" : {
+    "start" : 1640337008432,
+    "stop" : 1640337010990,
+    "duration" : 2558
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "xunit_setup_class_fixture_Test_Imdb",
+    "time" : {
+      "start" : 1640336996472,
+      "stop" : 1640337008430,
+      "duration" : 11958
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0,
+    "hasContent" : false,
+    "stepsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Verify IMDB Title and Url using Soft Assert",
+      "time" : {
+        "start" : 1640337008432,
+        "stop" : 1640337010990,
+        "duration" : 2558
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 0,
+      "hasContent" : false,
+      "stepsCount" : 0
+    } ],
+    "attachments" : [ {
+      "uid" : "c885b70dca580fcd",
+      "name" : "log",
+      "source" : "c885b70dca580fcd.txt",
+      "type" : "text/plain",
+      "size" : 559
+    } ],
+    "parameters" : [ ],
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 1,
+    "hasContent" : true,
+    "stepsCount" : 1
+  },
+  "afterStages" : [ {
+    "name" : "xunit_setup_class_fixture_Test_Imdb::0",
+    "time" : {
+      "start" : 1640337010991,
+      "stop" : 1640337011553,
+      "duration" : 562
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0,
+    "hasContent" : false,
+    "stepsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "cl_automation"
+  }, {
+    "name" : "suite",
+    "value" : "test_imdb"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_Imdb"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-LVSINNE"
+  }, {
+    "name" : "thread",
+    "value" : "5412-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "cl_automation.test_imdb"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "f79ee49ca9c970e5.json",
+  "parameterValues" : [ ]
+}

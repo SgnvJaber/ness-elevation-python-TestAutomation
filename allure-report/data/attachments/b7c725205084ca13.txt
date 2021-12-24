@@ -1,0 +1,5 @@
+INFO     WDM:logger.py:26 ====== WebDriver manager ======
+INFO     WDM:logger.py:26 Current edge version is 96.0.1054
+INFO     WDM:logger.py:26 Get LATEST edgedriver version for 96.0.1054 Edge
+WARNING  charset_normalizer:api.py:121 Trying to detect encoding from a tiny portion of (30) byte(s).
+INFO     WDM:logger.py:26 Driver [.\\Drivers\drivers\edgedriver\win64\96.0.1054.62\msedgedriver.exe] found in cache

@@ -2,20 +2,19 @@
   "7e6acdfca12b03649f7ae8ee564f71d3" : {
     "statistic" : {
       "failed" : 0,
-      "broken" : 1,
+      "broken" : 0,
       "skipped" : 0,
-      "passed" : 0,
+      "passed" : 1,
       "unknown" : 0,
       "total" : 1
     },
     "items" : [ {
-      "uid" : "cd0a38ff6d696d47",
-      "status" : "broken",
-      "statusDetails" : "TypeError: Level not an integer or a valid string: None",
+      "uid" : "b1689e8ce94ff01",
+      "status" : "passed",
       "time" : {
-        "start" : 1640337223753,
-        "stop" : 1640337223753,
-        "duration" : 0
+        "start" : 1640349933412,
+        "stop" : 1640349936008,
+        "duration" : 2596
       }
     } ]
   }
